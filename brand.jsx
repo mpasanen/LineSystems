@@ -209,7 +209,7 @@ function StatTicker({ value, suffix = "", duration = 1800 }) {
 // Stands in for real video the founder will supply. Uses a Ken-Burns image
 // + a synthetic camera-POV "pipe" overlay that scrolls through, simulating
 // the inspection-camera footage Polinvent uses on their hero.
-function HeroVideo({ src = "assets/van-bronze-front-glossy.jpg", videoSrc = "assets/hero-teaser.mp4", accent = "#C9A572", overlay = 0.55, label = "PIPE INSPECTION · LIVE FOOTAGE", showPipeOverlay = false, useVideo = true }) {
+function HeroVideo({ src = "assets/van-bronze-front-glossy.jpg", videoSrc = "https://ihcirdgmyzuzxyit.public.blob.vercel-storage.com/videos/polinvent_mainpage_teaser.mp4", accent = "#C9A572", overlay = 0.55, label = "PIPE INSPECTION · LIVE FOOTAGE", showPipeOverlay = false, useVideo = true }) {
   const [t, setT] = useState(0);
   useEffect(() => {
     let raf;

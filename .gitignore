@@ -1,0 +1,18 @@
+# Original handoff archive (29 MB) — kept locally as reference, not in repo
+handoff.tar.gz
+
+# Extracted handoff bundle (linesystems/) — flattened content lives at repo root
+linesystems/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Node / build (in case we add tooling later)
+node_modules/
+*.log
+
+# Design canvas runtime sidecar
+.design-canvas.state.json

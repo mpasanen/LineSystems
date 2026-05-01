@@ -34,7 +34,7 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
       {/* ───── HERO ───── */}
       <section style={{ position: "relative", height: 880, width: "100%" }}>
         {heroLayout === "video" && (
-          <HeroVideo videoSrc="assets/hero-teaser.mp4" useVideo={true} accent={accent} overlay={0.55} label="POLINVENT · INVERSION DEMO" />
+          <HeroVideo videoSrc="https://ihcirdgmyzuzxyit.public.blob.vercel-storage.com/videos/polinvent_mainpage_teaser.mp4" useVideo={true} accent={accent} overlay={0.55} label="POLINVENT · INVERSION DEMO" />
         )}
         {heroLayout === "image" && (
           <CinemaPlate src="assets/van-bronze-front-glossy.jpg" focal="50% 55%" overlay={0.55} accent={accent} />

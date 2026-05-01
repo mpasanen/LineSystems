@@ -83,7 +83,7 @@ function HomepageB({ accent = "#C9A572", density = "spacious", heroLayout = "vid
 
         <div style={{ position: "relative" }}>
           {heroLayout === "video"
-            ? <HeroVideo videoSrc="assets/hero-teaser.mp4" useVideo={true} accent={accent} overlay={0.25} label="POLINVENT · DEMO" />
+            ? <HeroVideo videoSrc="https://ihcirdgmyzuzxyit.public.blob.vercel-storage.com/videos/polinvent_mainpage_teaser.mp4" useVideo={true} accent={accent} overlay={0.25} label="POLINVENT · DEMO" />
             : heroLayout === "image"
             ? <CinemaPlate src="assets/van-bronze-side.jpg" focal="50% 55%" overlay={0.25} accent={accent} />
             : <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 50% 50%, #1a1612, #050505 70%)", display: "flex", alignItems: "center", justifyContent: "center" }}><div style={{ transform: "scale(4)" }}><LSMark size={120} accent={accent} dark="#1a1a1c" /></div></div>}
