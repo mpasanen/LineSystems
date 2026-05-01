@@ -1,0 +1,255 @@
+/* global React, Wordmark, LSMark, LanguagePill, HomepageA, HomepageB, HomepageC */
+
+// Portfolio landing — three thumbnails, click to open the full version.
+// Uses hash routing (#a, #b, #c) handled by the host page.
+
+const VARIATIONS = [
+  {
+    id: "a",
+    letter: "A",
+    title: "Cinematic Premium",
+    eyebrow: "Full-bleed video · Cormorant display · jewelry-bronze",
+    blurb: "Polinventin rauhallisuus, mutta viimeistellympi. Iso typografia, pronssi käytetty kuin koru.",
+    height: 5400,
+    component: () => HomepageA,
+  },
+  {
+    id: "b",
+    letter: "B",
+    title: "Industrial Precision",
+    eyebrow: "Engineering doc · data tables · monospace detail",
+    blurb: "Insinöörilehden estetiikka — datataulukot, mittakaaviot, projektirekisteri. Tekninen selkeys.",
+    height: 5200,
+    component: () => HomepageB,
+  },
+  {
+    id: "c",
+    letter: "C",
+    title: "Editorial Calm",
+    eyebrow: "Long-form magazine · numbered chapters · serif rhythm",
+    blurb: "Pitkän muodon \"lehti\" — luvut I–V, anfangit, päiväkirjamainen referenssilista.",
+    height: 6000,
+    component: () => HomepageC,
+  },
+];
+
+function PortfolioPage({ accent = "#C9A572", density = "spacious", onSelect }) {
+  return (
+    <div style={{ minHeight: "100vh", background: "#0B0B0C", color: "#EDE6D6", fontFamily: "'Inter', system-ui, sans-serif", overflowX: "hidden" }}>
+      {/* ───── ambient background ───── */}
+      <div aria-hidden style={{
+        position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0,
+        background: `radial-gradient(ellipse at 80% -10%, ${accent}10, transparent 50%), radial-gradient(ellipse at 0% 110%, ${accent}08, transparent 55%)`,
+      }} />
+
+      {/* ───── nav ───── */}
+      <header style={{
+        position: "relative", zIndex: 2,
+        display: "flex", justifyContent: "space-between", alignItems: "center",
+        padding: "32px 56px",
+      }}>
+        <Wordmark accent={accent} size={32} />
+        <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
+          <LanguagePill accent={accent} active="FI" />
+          <a href="tel:+358503264439" style={{
+            padding: "10px 20px", border: `1px solid ${accent}`, color: accent,
+            fontSize: 11, letterSpacing: "0.24em", textTransform: "uppercase", textDecoration: "none",
+          }}>Soita →</a>
+        </div>
+      </header>
+
+      {/* ───── hero ───── */}
+      <section style={{ position: "relative", zIndex: 1, padding: "100px 56px 60px" }}>
+        <div style={{ maxWidth: 1280 }}>
+          <div style={{ fontSize: 11, letterSpacing: "0.32em", textTransform: "uppercase", color: accent, marginBottom: 28, display: "flex", alignItems: "center" }}>
+            <span style={{ display: "inline-block", width: 32, height: 1, background: accent, marginRight: 16 }} />
+            Verkkosivuehdotus &nbsp;·&nbsp; Three directions for review
+          </div>
+          <h1 style={{
+            fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+            fontSize: 124, lineHeight: 0.92, letterSpacing: "-0.02em", margin: 0, color: "#F4EEDF",
+          }}>
+            Kolme suuntaa.<br />
+            <span style={{ fontStyle: "italic", color: accent }}>Yksi tarina.</span>
+          </h1>
+          <p style={{ marginTop: 36, fontSize: 17, lineHeight: 1.65, color: "#c9c2b6", maxWidth: 640 }}>
+            Klikkaa pikkukuvaa avataksesi koko sivu. Jokainen variaatio kantaa
+            saman brändin — vain rytmi, typografia ja sävy vaihtuu. Valitse,
+            mikä tuntuu oikealta — tai sekoita parhaat palaset.
+          </p>
+        </div>
+        <div style={{ marginTop: 56, display: "flex", gap: 32, alignItems: "center", fontSize: 11, letterSpacing: "0.28em", textTransform: "uppercase", color: "#7d796f" }}>
+          <span>{VARIATIONS.length} variaatiota</span>
+          <span style={{ width: 24, height: 1, background: `${accent}80` }} />
+          <span>FI · EN · SV · DA · NO</span>
+          <span style={{ width: 24, height: 1, background: `${accent}80` }} />
+          <span>Est. 2026 · Jyväskylä</span>
+        </div>
+      </section>
+
+      {/* ───── thumbnails ───── */}
+      <section style={{ position: "relative", zIndex: 1, padding: "40px 56px 120px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 32 }}>
+          {VARIATIONS.map((v, i) => (
+            <PortfolioCard key={v.id} variation={v} accent={accent} density={density} onSelect={onSelect} index={i} />
+          ))}
+        </div>
+      </section>
+
+      {/* ───── footer ───── */}
+      <footer style={{
+        position: "relative", zIndex: 1,
+        padding: "40px 56px", borderTop: `1px solid ${accent}30`,
+        display: "flex", justifyContent: "space-between", alignItems: "center",
+        fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", color: "#5e5a52",
+      }}>
+        <div>© 2026 Line Systems Oy · Y 3616448-8 · Vilkkutie 3 A 15, 40320 Jyväskylä</div>
+        <a href="tel:+358503264439" style={{ color: accent, textDecoration: "none" }}>050 326 4439</a>
+      </footer>
+    </div>
+  );
+}
+
+function PortfolioCard({ variation, accent, density, onSelect, index }) {
+  const [hover, setHover] = React.useState(false);
+  const frameRef = React.useRef(null);
+  const [scale, setScale] = React.useState(0.32);
+  // Top slice height in source pixels — captures hero + first content section.
+  const SLICE = 1820;
+  const Comp = variation.component();
+
+  // Match scale to the actual rendered column width so the preview always fills
+  // the card without overflow regardless of viewport.
+  React.useEffect(() => {
+    const el = frameRef.current;
+    if (!el) return;
+    const update = () => setScale(el.clientWidth / 1440);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  return (
+    <a
+      href={`#${variation.id}`}
+      onClick={(e) => { e.preventDefault(); onSelect && onSelect(variation.id); }}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      style={{ display: "block", textDecoration: "none", color: "inherit", cursor: "pointer" }}
+    >
+      <div ref={frameRef} style={{
+        position: "relative", overflow: "hidden",
+        width: "100%", aspectRatio: `1440 / ${SLICE}`,
+        background: "#0F0F11",
+        border: `1px solid ${hover ? accent : "rgba(237,230,214,0.10)"}`,
+        boxShadow: hover ? `0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px ${accent}40` : "0 12px 40px rgba(0,0,0,0.35)",
+        transform: hover ? "translateY(-6px)" : "translateY(0)",
+        transition: "border-color 0.35s, box-shadow 0.35s, transform 0.35s",
+      }}>
+        {/* Full homepage rendered at its native 1440 width then scaled down
+            to fit the card. ResizeObserver keeps the scale glued to the
+            column width so there's no overflow at any viewport size. */}
+        <div style={{
+          position: "absolute", top: 0, left: 0,
+          width: 1440, height: SLICE,
+          transform: `scale(${scale})`, transformOrigin: "top left",
+          pointerEvents: "none",
+        }}>
+          {Comp ? <Comp accent={accent} density={density} heroLayout="image" /> : null}
+        </div>
+
+        {/* gradient + label overlay */}
+        <div style={{
+          position: "absolute", inset: 0, zIndex: 2,
+          display: "flex", flexDirection: "column", justifyContent: "space-between",
+          padding: 22,
+          background: `linear-gradient(180deg, rgba(11,11,12,0.0) 60%, rgba(11,11,12,0.85) 100%)`,
+          pointerEvents: "none",
+        }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+            <div style={{
+              padding: "6px 12px", background: "rgba(11,11,12,0.7)", backdropFilter: "blur(6px)",
+              border: `1px solid ${accent}60`, color: accent,
+              fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: "0.24em",
+            }}>VARIATION · {variation.letter}</div>
+            <div style={{
+              opacity: hover ? 1 : 0,
+              transform: hover ? "translateY(0)" : "translateY(-8px)",
+              transition: "opacity 0.3s, transform 0.3s",
+              padding: "8px 14px", background: accent, color: "#0B0B0C",
+              fontSize: 10, letterSpacing: "0.28em", textTransform: "uppercase", fontWeight: 700,
+            }}>
+              Avaa →
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Caption */}
+      <div style={{ marginTop: 28 }}>
+        <div style={{ display: "flex", alignItems: "baseline", gap: 18, marginBottom: 10 }}>
+          <div style={{
+            fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic",
+            fontSize: 56, color: accent, lineHeight: 1,
+          }}>{variation.letter}</div>
+          <div style={{
+            fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+            fontSize: 36, color: "#F4EEDF", letterSpacing: "-0.01em",
+          }}>{variation.title}</div>
+        </div>
+        <div style={{
+          fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase",
+          color: "#9a948a", marginBottom: 14,
+        }}>{variation.eyebrow}</div>
+        <div style={{ fontSize: 14, lineHeight: 1.65, color: "#c9c2b6" }}>{variation.blurb}</div>
+        <div style={{
+          marginTop: 22, display: "inline-flex", alignItems: "center", gap: 10,
+          fontSize: 11, letterSpacing: "0.28em", textTransform: "uppercase",
+          color: hover ? accent : "#EDE6D6", transition: "color 0.25s",
+        }}>
+          Katso koko sivu
+          <span style={{
+            width: 32, height: 1, background: hover ? accent : "#EDE6D6",
+            transform: hover ? "scaleX(1.4)" : "scaleX(1)", transformOrigin: "left",
+            transition: "transform 0.3s, background 0.25s",
+          }} />
+        </div>
+      </div>
+    </a>
+  );
+}
+
+// Floating "back to portfolio" pill shown when a homepage is open.
+function PortfolioBackBar({ accent = "#C9A572", letter, title, onBack }) {
+  return (
+    <div style={{
+      position: "fixed", top: 16, left: "50%", transform: "translateX(-50%)",
+      zIndex: 1000, display: "flex", alignItems: "center", gap: 16,
+      padding: "10px 16px 10px 14px",
+      background: "rgba(11,11,12,0.78)", backdropFilter: "blur(14px)",
+      border: `1px solid ${accent}40`, borderRadius: 999,
+      fontFamily: "'Inter', system-ui, sans-serif",
+    }}>
+      <a href="#" onClick={(e) => { e.preventDefault(); onBack && onBack(); }} style={{
+        display: "inline-flex", alignItems: "center", gap: 8,
+        color: "#EDE6D6", textDecoration: "none",
+        fontSize: 11, letterSpacing: "0.28em", textTransform: "uppercase", fontWeight: 600,
+      }}>
+        <span style={{ fontSize: 16, color: accent }}>←</span>
+        Portfolio
+      </a>
+      <span style={{ width: 1, height: 16, background: "rgba(237,230,214,0.18)" }} />
+      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        <span style={{
+          fontFamily: "'JetBrains Mono', monospace", fontSize: 10,
+          letterSpacing: "0.24em", color: accent,
+          padding: "3px 8px", border: `1px solid ${accent}60`, borderRadius: 4,
+        }}>{letter}</span>
+        <span style={{ fontSize: 12, letterSpacing: "0.06em", color: "#c9c2b6" }}>{title}</span>
+      </div>
+    </div>
+  );
+}
+
+Object.assign(window, { PortfolioPage, PortfolioBackBar, PORTFOLIO_VARIATIONS: VARIATIONS });
