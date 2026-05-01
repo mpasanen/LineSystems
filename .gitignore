@@ -16,3 +16,6 @@ node_modules/
 
 # Design canvas runtime sidecar
 .design-canvas.state.json
+
+# Local screenshot artefacts from responsive testing
+shots/

@@ -4,6 +4,47 @@
 
 const { useState, useEffect, useRef } = React;
 
+// ─── Viewport hook ──────────────────────────────────────────────────────────
+// Buckets: mobile <768, tablet 768–1023, desktop ≥1024. Components branch
+// styles on these flags rather than CSS classes (React inline styles win
+// specificity, so JS-driven branching is cleaner than !important overrides).
+const BP = { mobile: 768, tablet: 1024 };
+function useViewport() {
+  const get = () => {
+    const w = typeof window !== "undefined" ? window.innerWidth : 1280;
+    if (typeof document !== "undefined") {
+      document.documentElement.setAttribute("data-vp-w", String(w));
+    }
+    return { width: w, isMobile: w < BP.mobile, isTablet: w >= BP.mobile && w < BP.tablet, isDesktop: w >= BP.tablet };
+  };
+  const [vp, setVp] = useState(get);
+  useEffect(() => {
+    let raf = 0;
+    const onResize = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => setVp(get()));
+    };
+    window.addEventListener("resize", onResize);
+    return () => { window.removeEventListener("resize", onResize); cancelAnimationFrame(raf); };
+  }, []);
+  return vp;
+}
+
+// pickResponsive — pick a value by viewport bucket. Pass either positional
+// (mobile, tablet, desktop) or a partial object. Tablet falls back to desktop
+// if not provided; mobile falls back to tablet (then desktop).
+function rv(vp, mobile, tablet, desktop) {
+  if (typeof mobile === "object" && mobile !== null) {
+    const o = mobile;
+    if (vp.isMobile) return o.mobile ?? o.tablet ?? o.desktop;
+    if (vp.isTablet) return o.tablet ?? o.desktop ?? o.mobile;
+    return o.desktop ?? o.tablet ?? o.mobile;
+  }
+  if (vp.isMobile) return mobile;
+  if (vp.isTablet) return tablet ?? desktop;
+  return desktop ?? tablet ?? mobile;
+}
+
 // ─── Logo mark ──────────────────────────────────────────────────────────────
 // Recreated from the founder's reference photos: a tall dark blade on the
 // left, a shorter gold triangle on the right, sharing a baseline.
@@ -305,4 +346,4 @@ function LanguagePill({ accent = "#C9A572", color = "#EDE6D6", active = "FI" }) 
 }
 
 // Expose to other Babel scripts.
-Object.assign(window, { LSMark, Wordmark, ReliningAnimation, CinemaPlate, PartnerMarquee, StatTicker, HeroVideo, LanguagePill });
+Object.assign(window, { LSMark, Wordmark, ReliningAnimation, CinemaPlate, PartnerMarquee, StatTicker, HeroVideo, LanguagePill, useViewport, rv });

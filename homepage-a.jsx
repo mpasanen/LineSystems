@@ -1,38 +1,57 @@
-/* global React, CinemaPlate, Wordmark, LSMark, ReliningAnimation, PartnerMarquee, StatTicker, HeroVideo, LanguagePill */
+/* global React, CinemaPlate, Wordmark, LSMark, ReliningAnimation, PartnerMarquee, StatTicker, HeroVideo, LanguagePill, useViewport, rv */
 
 // Variation A — "Cinematic premium" (B2B reseller + training)
 // Line Systems Oy: distributes pipe-relining materials & equipment to
 // contractors across the Nordics, plus runs hands-on training courses.
 // Webshop launching summer 2026.
+//
+// forceDesktop: portfolio thumbnails render this component at native 1440 width
+// then CSS-scale it down. Without forceDesktop the page would detect the real
+// (small) viewport and render the mobile layout inside a desktop-sized
+// container — looking bizarre in the thumbnail.
 
-function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "video" }) {
+function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "video", forceDesktop = false }) {
+  const realVp = useViewport();
+  const vp = forceDesktop ? { width: 1440, isMobile: false, isTablet: false, isDesktop: true } : realVp;
   const pad = density === "dense" ? 64 : density === "spacious" ? 120 : 88;
+  const sectionPadV = rv(vp, Math.round(pad * 0.55), Math.round(pad * 0.8), pad);
+  const sectionPadH = rv(vp, 20, 36, 56);
 
   return (
     <div style={{ background: "#0B0B0C", color: "#EDE6D6", fontFamily: "'Inter', system-ui, sans-serif", overflow: "hidden" }}>
       {/* ───── NAV ───── */}
       <header style={{
         position: "absolute", top: 0, left: 0, right: 0, zIndex: 10,
-        display: "flex", justifyContent: "space-between", alignItems: "center",
-        padding: "32px 56px",
+        display: "flex", justifyContent: vp.isMobile ? "flex-end" : "space-between", alignItems: "center", gap: 16,
+        padding: `${rv(vp, 20, 28, 32)}px ${sectionPadH}px`,
       }}>
-        <Wordmark accent={accent} size={32} />
-        <nav style={{ display: "flex", gap: 40, fontSize: 12, letterSpacing: "0.22em", textTransform: "uppercase", fontWeight: 500 }}>
-          {["Tuotteet", "Menetelmä", "Koulutus", "Kumppanit", "Yhteys"].map(x => (
-            <a key={x} href="#" style={{ color: "#EDE6D6", textDecoration: "none", opacity: 0.85 }}>{x}</a>
-          ))}
-        </nav>
-        <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
-          <LanguagePill accent={accent} active="FI" />
+        {/* On mobile the floating PortfolioBackBar at top-left provides brand
+            identity + return-nav, so we drop the wordmark to free space for
+            the Soita CTA without overlap. */}
+        {!vp.isMobile && <Wordmark accent={accent} size={rv(vp, 26, 30, 32)} />}
+        {!vp.isMobile && (
+          <nav style={{
+            display: "flex",
+            gap: vp.isTablet ? 24 : 40,
+            fontSize: 12, letterSpacing: "0.22em", textTransform: "uppercase", fontWeight: 500,
+          }}>
+            {(vp.isTablet ? ["Tuotteet", "Koulutus", "Yhteys"] : ["Tuotteet", "Menetelmä", "Koulutus", "Kumppanit", "Yhteys"]).map(x => (
+              <a key={x} href="#" style={{ color: "#EDE6D6", textDecoration: "none", opacity: 0.85 }}>{x}</a>
+            ))}
+          </nav>
+        )}
+        <div style={{ display: "flex", gap: rv(vp, 12, 16, 20), alignItems: "center" }}>
+          {!vp.isMobile && <LanguagePill accent={accent} active="FI" />}
           <a href="tel:+358503264439" style={{
-            padding: "10px 20px", border: `1px solid ${accent}`, color: accent,
-            fontSize: 11, letterSpacing: "0.24em", textTransform: "uppercase", textDecoration: "none",
+            padding: "12px 20px", border: `1px solid ${accent}`, color: accent,
+            fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", textDecoration: "none",
+            minHeight: 44, display: "inline-flex", alignItems: "center",
           }}>Soita →</a>
         </div>
       </header>
 
       {/* ───── HERO ───── */}
-      <section style={{ position: "relative", height: 880, width: "100%" }}>
+      <section style={{ position: "relative", height: rv(vp, 640, 760, 880), width: "100%" }}>
         {heroLayout === "video" && (
           <HeroVideo videoSrc="https://ihcirdgmyzuzxyit.public.blob.vercel-storage.com/videos/polinvent_mainpage_teaser.mp4" useVideo={true} accent={accent} overlay={0.55} label="POLINVENT · INVERSION DEMO" />
         )}
@@ -47,16 +66,16 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
           </div>
         )}
 
-        <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 56px 80px" }}>
+        <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: `0 ${sectionPadH}px ${rv(vp, 40, 60, 80)}px` }}>
           <div style={{ maxWidth: 1100 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 32, fontSize: 11, letterSpacing: "0.32em", textTransform: "uppercase", color: accent }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: rv(vp, 20, 26, 32), fontSize: 11, letterSpacing: "0.32em", textTransform: "uppercase", color: accent, flexWrap: "wrap" }}>
               <span style={{ width: 32, height: 1, background: accent }} />
-              Sukitustarvikkeet &nbsp;·&nbsp; Pipe relining materials &amp; equipment
+              <span>Sukitustarvikkeet &nbsp;·&nbsp; Pipe relining materials &amp; equipment</span>
             </div>
             <h1 style={{
               fontFamily: "'Cormorant Garamond', serif",
               fontWeight: 300,
-              fontSize: 132,
+              fontSize: "clamp(56px, 13vw, 132px)",
               lineHeight: 0.92,
               letterSpacing: "-0.02em",
               margin: 0,
@@ -65,56 +84,76 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
               Materiaalit, laitteet<br/>
               ja <span style={{ fontStyle: "italic", color: accent }}>osaaminen.</span>
             </h1>
-            <p style={{ marginTop: 36, fontSize: 17, lineHeight: 1.6, maxWidth: 560, color: "#c9c2b6" }}>
+            <p style={{ marginTop: rv(vp, 24, 30, 36), fontSize: rv(vp, 16, 16, 17), lineHeight: 1.6, maxWidth: 560, color: "#c9c2b6" }}>
               Line Systems toimittaa sukitusalan ammattilaisille materiaalit,
               laitteet ja koulutuksen — yhdestä paikasta. Polinventin ja muiden
               maailman johtavien valmistajien tuotteet, suomalainen varasto,
               pohjoismainen toimitus.
             </p>
-            <div style={{ marginTop: 44, display: "flex", gap: 20, alignItems: "center" }}>
+            <div style={{ marginTop: rv(vp, 28, 36, 44), display: "flex", gap: rv(vp, 14, 18, 20), alignItems: "center", flexWrap: "wrap" }}>
               <a href="tel:+358503264439" style={{
-                padding: "20px 36px", background: accent, color: "#0B0B0C",
+                padding: rv(vp, "16px 24px", "18px 30px", "20px 36px"),
+                background: accent, color: "#0B0B0C",
                 fontSize: 12, letterSpacing: "0.28em", textTransform: "uppercase", fontWeight: 600, textDecoration: "none",
-                display: "inline-flex", alignItems: "center", gap: 12,
+                display: "inline-flex", alignItems: "center", gap: 12, minHeight: 48,
               }}>
                 Soita Jonnelle <span style={{ fontSize: 18 }}>→</span>
               </a>
               <a href="#shop" style={{
-                padding: "20px 24px", color: "#EDE6D6",
+                padding: "16px 0", color: "#EDE6D6",
                 fontSize: 12, letterSpacing: "0.28em", textTransform: "uppercase", textDecoration: "none",
                 borderBottom: "1px solid rgba(237,230,214,0.3)",
+                minHeight: 48, display: "inline-flex", alignItems: "center",
               }}>
                 Verkkokauppa avautuu →
               </a>
             </div>
           </div>
 
-          <div style={{ position: "absolute", right: 56, bottom: 80, textAlign: "right" }}>
-            <div style={{ fontSize: 10, letterSpacing: "0.32em", textTransform: "uppercase", color: "#9a948a", marginBottom: 6 }}>Est. 2026 — Jyväskylä, Finland · Nordics</div>
-            <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 28, fontStyle: "italic", color: accent }}>nº 001</div>
-          </div>
+          {!vp.isMobile && (
+            <div style={{ position: "absolute", right: sectionPadH, bottom: rv(vp, 40, 60, 80), textAlign: "right" }}>
+              <div style={{ fontSize: 10, letterSpacing: "0.32em", textTransform: "uppercase", color: "#9a948a", marginBottom: 6 }}>Est. 2026 — Jyväskylä, Finland · Nordics</div>
+              <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 28, fontStyle: "italic", color: accent }}>nº 001</div>
+            </div>
+          )}
         </div>
 
-        <div style={{ position: "absolute", left: 56, bottom: 36, fontSize: 10, letterSpacing: "0.32em", textTransform: "uppercase", color: "#9a948a", display: "flex", alignItems: "center", gap: 12 }}>
-          <span style={{ display: "inline-block", width: 1, height: 28, background: accent, animation: "ls-scrollline 2.4s ease-in-out infinite" }} />
-          Selaa
-        </div>
+        {!vp.isMobile && (
+          <div style={{ position: "absolute", left: sectionPadH, bottom: 36, fontSize: 10, letterSpacing: "0.32em", textTransform: "uppercase", color: "#9a948a", display: "flex", alignItems: "center", gap: 12 }}>
+            <span style={{ display: "inline-block", width: 1, height: 28, background: accent, animation: "ls-scrollline 2.4s ease-in-out infinite" }} />
+            Selaa
+          </div>
+        )}
       </section>
 
       {/* ───── INTRO STRIP — 3 PILLARS ───── */}
-      <section style={{ padding: `${pad}px 56px`, borderBottom: "1px solid rgba(237,230,214,0.08)" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 80, alignItems: "start" }}>
-          <div style={{ fontSize: 11, letterSpacing: "0.32em", textTransform: "uppercase", color: accent, paddingTop: 16 }}>
+      <section style={{ padding: `${sectionPadV}px ${sectionPadH}px`, borderBottom: "1px solid rgba(237,230,214,0.08)" }}>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: rv(vp, "1fr", "1fr", "1fr 2fr"),
+          gap: rv(vp, 32, 56, 80),
+          alignItems: "start",
+        }}>
+          <div style={{ fontSize: 11, letterSpacing: "0.32em", textTransform: "uppercase", color: accent, paddingTop: vp.isMobile ? 0 : 16 }}>
             <span style={{ display: "inline-block", width: 24, height: 1, background: accent, marginRight: 16, verticalAlign: "middle" }} />
             Mitä teemme
           </div>
           <div>
-            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontSize: 54, lineHeight: 1.15, margin: 0, color: "#F4EEDF", textWrap: "balance" }}>
+            <p style={{
+              fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+              fontSize: "clamp(28px, 5.5vw, 54px)",
+              lineHeight: 1.15, margin: 0, color: "#F4EEDF", textWrap: "balance",
+            }}>
               Kolme asiaa, joiden ympärille <em style={{ color: accent }}>kaikki rakentuu</em>:
               materiaalit, joihin urakoitsija voi luottaa, laitteet jotka
               kestävät työmaan, ja koulutus joka tekee niistä tuottavaa työtä.
             </p>
-            <div style={{ marginTop: 56, display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 48 }}>
+            <div style={{
+              marginTop: rv(vp, 36, 44, 56),
+              display: "grid",
+              gridTemplateColumns: rv(vp, "1fr", "repeat(3, 1fr)", "repeat(3, 1fr)"),
+              gap: rv(vp, 24, 32, 48),
+            }}>
               {[
                 ["Tarvikkeet", "Sukat, hartsit, kalibrointiletkut, jyrsinpäät — varastosta tai tilauksesta."],
                 ["Laitteet", "Höyrykattilat, kompressorit, kamerat, robotit. Polinvent, Picote, iPEK."],
@@ -131,14 +170,24 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
       </section>
 
       {/* ───── PRODUCTS / CATEGORIES ───── */}
-      <section style={{ padding: `${pad}px 56px`, borderBottom: "1px solid rgba(237,230,214,0.08)" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 64 }}>
+      <section style={{ padding: `${sectionPadV}px ${sectionPadH}px`, borderBottom: "1px solid rgba(237,230,214,0.08)" }}>
+        <div style={{
+          display: "flex", justifyContent: "space-between",
+          alignItems: vp.isMobile ? "flex-start" : "flex-end",
+          marginBottom: rv(vp, 36, 48, 64),
+          flexDirection: vp.isMobile ? "column" : "row",
+          gap: vp.isMobile ? 24 : 32,
+        }}>
           <div>
             <div style={{ fontSize: 11, letterSpacing: "0.32em", textTransform: "uppercase", color: accent, marginBottom: 24 }}>
               <span style={{ display: "inline-block", width: 24, height: 1, background: accent, marginRight: 16, verticalAlign: "middle" }} />
               Tuotteet
             </div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontSize: 88, lineHeight: 0.95, margin: 0, color: "#F4EEDF", letterSpacing: "-0.01em" }}>
+            <h2 style={{
+              fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+              fontSize: "clamp(40px, 9vw, 88px)",
+              lineHeight: 0.95, margin: 0, color: "#F4EEDF", letterSpacing: "-0.01em",
+            }}>
               Valikoima<br/><em style={{ color: accent }}>ammattilaiselle.</em>
             </h2>
           </div>
@@ -148,7 +197,11 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
           </div>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 24 }}>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: rv(vp, "1fr", "repeat(2, 1fr)", "repeat(4, 1fr)"),
+          gap: rv(vp, 16, 20, 24),
+        }}>
           {[
             { code: "01", title: "Sukat & sukkamateriaalit", count: "85 nimikettä", brands: "Brawoliner · Polinvent" },
             { code: "02", title: "Hartsit & kovetteet", count: "32 nimikettä", brands: "Polinvent · Resinit" },
@@ -160,34 +213,43 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
             { code: "08", title: "Suojavarusteet & työkalut", count: "60+ nimikettä", brands: "" },
           ].map((p, i) => (
             <a key={i} href="#" style={{
-              background: "#0F0F11", border: "1px solid rgba(237,230,214,0.08)", padding: 28,
+              background: "#0F0F11", border: "1px solid rgba(237,230,214,0.08)", padding: rv(vp, 22, 26, 28),
               textDecoration: "none", color: "#EDE6D6", display: "flex", flexDirection: "column", justifyContent: "space-between",
-              minHeight: 220, position: "relative",
+              minHeight: 200, position: "relative",
               transition: "border-color 0.2s",
             }}>
               <div>
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: accent, letterSpacing: "0.16em", marginBottom: 18 }}>{p.code}</div>
-                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 26, color: "#F4EEDF", lineHeight: 1.15, marginBottom: 12 }}>{p.title}</div>
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: accent, letterSpacing: "0.16em", marginBottom: 16 }}>{p.code}</div>
+                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: rv(vp, 22, 24, 26), color: "#F4EEDF", lineHeight: 1.15, marginBottom: 12 }}>{p.title}</div>
               </div>
               <div>
                 <div style={{ fontSize: 12, color: "#9a948a", marginBottom: 6 }}>{p.count}</div>
                 {p.brands && <div style={{ fontSize: 11, color: accent, letterSpacing: "0.04em" }}>{p.brands}</div>}
               </div>
-              <div style={{ position: "absolute", right: 24, bottom: 24, color: accent, fontSize: 16 }}>→</div>
+              <div style={{ position: "absolute", right: 22, bottom: 22, color: accent, fontSize: 16 }}>→</div>
             </a>
           ))}
         </div>
       </section>
 
       {/* ───── TRAINING ───── */}
-      <section style={{ padding: `${pad}px 56px`, borderBottom: "1px solid rgba(237,230,214,0.08)" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "stretch" }}>
+      <section style={{ padding: `${sectionPadV}px ${sectionPadH}px`, borderBottom: "1px solid rgba(237,230,214,0.08)" }}>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: rv(vp, "1fr", "1fr", "1fr 1fr"),
+          gap: rv(vp, 32, 56, 80),
+          alignItems: "stretch",
+        }}>
           <div>
             <div style={{ fontSize: 11, letterSpacing: "0.32em", textTransform: "uppercase", color: accent, marginBottom: 24 }}>
               <span style={{ display: "inline-block", width: 24, height: 1, background: accent, marginRight: 16, verticalAlign: "middle" }} />
               Koulutus
             </div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontSize: 76, lineHeight: 1, margin: 0, color: "#F4EEDF" }}>
+            <h2 style={{
+              fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+              fontSize: "clamp(36px, 8vw, 76px)",
+              lineHeight: 1, margin: 0, color: "#F4EEDF",
+            }}>
               Hyvä tuote<br/>tarvitsee <em style={{ color: accent }}>hyvän tekijän.</em>
             </h2>
             <p style={{ marginTop: 28, fontSize: 16, lineHeight: 1.7, color: "#c9c2b6", maxWidth: 460 }}>
@@ -202,7 +264,15 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
                 ["Sukituskurssi", "3 pv", "Inversiomenetelmä, kovetus, jälkitarkastus"],
                 ["Robottityöt", "2 pv", "Picote-jyrsintä ja haaroitusten avaus"],
                 ["Työmaakäynti", "0,5 pv", "Asiakkaan kohteessa, ongelmanratkaisu"],
-              ].map(([h, d, b], i) => (
+              ].map(([h, d, b], i) => vp.isMobile ? (
+                <div key={i} style={{ padding: "18px 0", borderTop: "1px solid rgba(237,230,214,0.12)" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 12 }}>
+                    <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 22, color: "#F4EEDF" }}>{h}</div>
+                    <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: accent, letterSpacing: "0.12em", flexShrink: 0 }}>{d}</div>
+                  </div>
+                  <div style={{ marginTop: 6, fontSize: 13, color: "#9a948a" }}>{b}</div>
+                </div>
+              ) : (
                 <div key={i} style={{
                   display: "grid", gridTemplateColumns: "1fr auto 2fr auto", gap: 24, alignItems: "center",
                   padding: "22px 0", borderTop: "1px solid rgba(237,230,214,0.12)",
@@ -215,11 +285,11 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
               ))}
             </div>
           </div>
-          <div style={{ position: "relative", minHeight: 720 }}>
+          <div style={{ position: "relative", minHeight: rv(vp, 360, 540, 720), order: vp.isMobile ? -1 : 0 }}>
             <CinemaPlate src="assets/founder-hq-van.jpg" focal="45% 55%" overlay={0.2} accent={accent} kenBurns={false} />
-            <div style={{ position: "absolute", left: 32, bottom: 32, right: 32, padding: 28, background: "rgba(11,11,12,0.85)", backdropFilter: "blur(8px)", borderLeft: `2px solid ${accent}` }}>
+            <div style={{ position: "absolute", left: rv(vp, 16, 24, 32), bottom: rv(vp, 16, 24, 32), right: rv(vp, 16, 24, 32), padding: rv(vp, 18, 22, 28), background: "rgba(11,11,12,0.85)", backdropFilter: "blur(8px)", borderLeft: `2px solid ${accent}` }}>
               <div style={{ fontSize: 11, letterSpacing: "0.28em", textTransform: "uppercase", color: accent, marginBottom: 8 }}>Kouluttaja</div>
-              <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 28, color: "#F4EEDF", lineHeight: 1.25 }}>
+              <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: rv(vp, 20, 24, 28), color: "#F4EEDF", lineHeight: 1.25 }}>
                 Yli 12 vuotta kentällä — sama mies opettaa.
               </div>
             </div>
@@ -228,17 +298,27 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
       </section>
 
       {/* ───── PARTNERS ───── */}
-      <section style={{ padding: `${pad}px 0`, borderBottom: "1px solid rgba(237,230,214,0.08)" }}>
-        <div style={{ padding: "0 56px", marginBottom: 56 }}>
+      <section style={{ padding: `${sectionPadV}px 0`, borderBottom: "1px solid rgba(237,230,214,0.08)" }}>
+        <div style={{ padding: `0 ${sectionPadH}px`, marginBottom: rv(vp, 36, 48, 56) }}>
           <div style={{ fontSize: 11, letterSpacing: "0.32em", textTransform: "uppercase", color: accent, marginBottom: 24 }}>
             <span style={{ display: "inline-block", width: 24, height: 1, background: accent, marginRight: 16, verticalAlign: "middle" }} />
             Kumppanit
           </div>
-          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontSize: 76, lineHeight: 1, margin: 0, color: "#F4EEDF" }}>
+          <h2 style={{
+            fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+            fontSize: "clamp(36px, 8vw, 76px)",
+            lineHeight: 1, margin: 0, color: "#F4EEDF",
+          }}>
             Valmistajat <em style={{ color: accent }}>joihin luotamme.</em>
           </h2>
         </div>
-        <div style={{ padding: "0 56px", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 1, background: "rgba(237,230,214,0.08)", border: "1px solid rgba(237,230,214,0.08)", marginBottom: 32 }}>
+        <div style={{
+          padding: `0 ${sectionPadH}px`,
+          display: "grid",
+          gridTemplateColumns: rv(vp, "1fr", "repeat(2, 1fr)", "repeat(3, 1fr)"),
+          gap: 1, background: "rgba(237,230,214,0.08)", border: "1px solid rgba(237,230,214,0.08)",
+          marginBottom: 32,
+        }}>
           {[
             { name: "Polinvent", country: "HU", focus: "Sukat, hartsit, kovetus" },
             { name: "Picote Solutions", country: "FI", focus: "Robotit, jyrsintä" },
@@ -247,9 +327,9 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
             { name: "Lateral Repairs", country: "UK", focus: "Pistekorjaus" },
             { name: "Rovion", country: "FI", focus: "Kameralaitteet" },
           ].map((p, i) => (
-            <div key={i} style={{ background: "#0B0B0C", padding: 32, position: "relative" }}>
-              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color: "#9a948a", letterSpacing: "0.18em", marginBottom: 20 }}>{p.country}</div>
-              <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 28, color: "#F4EEDF", marginBottom: 10 }}>{p.name}</div>
+            <div key={i} style={{ background: "#0B0B0C", padding: rv(vp, 22, 28, 32), position: "relative" }}>
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color: "#9a948a", letterSpacing: "0.18em", marginBottom: 16 }}>{p.country}</div>
+              <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: rv(vp, 24, 26, 28), color: "#F4EEDF", marginBottom: 10 }}>{p.name}</div>
               <div style={{ fontSize: 12, color: "#9a948a" }}>{p.focus}</div>
             </div>
           ))}
@@ -258,14 +338,23 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
       </section>
 
       {/* ───── FOUNDER QUOTE ───── */}
-      <section style={{ padding: `${pad}px 56px`, borderBottom: "1px solid rgba(237,230,214,0.08)" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "5fr 4fr", gap: 80, alignItems: "center" }}>
+      <section style={{ padding: `${sectionPadV}px ${sectionPadH}px`, borderBottom: "1px solid rgba(237,230,214,0.08)" }}>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: rv(vp, "1fr", "1fr", "5fr 4fr"),
+          gap: rv(vp, 32, 56, 80),
+          alignItems: "center",
+        }}>
           <div>
             <div style={{ fontSize: 11, letterSpacing: "0.32em", textTransform: "uppercase", color: accent, marginBottom: 32 }}>
               <span style={{ display: "inline-block", width: 24, height: 1, background: accent, marginRight: 16, verticalAlign: "middle" }} />
               Tekijä
             </div>
-            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontStyle: "italic", fontSize: 44, lineHeight: 1.25, color: "#F4EEDF", margin: 0, textWrap: "balance" }}>
+            <p style={{
+              fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontStyle: "italic",
+              fontSize: "clamp(24px, 4.5vw, 44px)",
+              lineHeight: 1.25, color: "#F4EEDF", margin: 0, textWrap: "balance",
+            }}>
               "Yli kymmenen vuotta sukitusta kentällä opetti, mistä tarvikkeesta
               urakoitsija oikeasti välittää. Nyt myyn niitä — ja opetan,
               miten niitä käytetään. Soita, niin jutellaan."
@@ -277,70 +366,80 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
                 <div style={{ fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", color: "#9a948a", marginTop: 4 }}>Perustaja, Line Systems Oy</div>
               </div>
             </div>
-            <div style={{ marginTop: 48, display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
+            <div style={{ marginTop: rv(vp, 36, 44, 48), display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: rv(vp, 14, 18, 24) }}>
               {[["12+ v", "alalla"], ["6", "valmistajakumppania"], ["4", "pohjoismaata"]].map(([n, l], i) => (
                 <div key={i} style={{ borderTop: `1px solid ${accent}`, paddingTop: 14 }}>
-                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 44, color: accent, lineHeight: 1 }}>{n}</div>
-                  <div style={{ fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", color: "#9a948a", marginTop: 8 }}>{l}</div>
+                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: rv(vp, 28, 36, 44), color: accent, lineHeight: 1 }}>{n}</div>
+                  <div style={{ fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: "#9a948a", marginTop: 8, lineHeight: 1.4 }}>{l}</div>
                 </div>
               ))}
             </div>
           </div>
-          <div style={{ position: "relative", aspectRatio: "4/5" }}>
+          <div style={{ position: "relative", aspectRatio: "4/5", order: vp.isMobile ? -1 : 0 }}>
             <CinemaPlate src="assets/founder-portrait.jpg" focal="50% 30%" overlay={0.15} kenBurns={false} accent={accent} />
           </div>
         </div>
       </section>
 
       {/* ───── WEBSHOP TEASER — DEDICATED ───── */}
-      <section id="shop" style={{ padding: `${pad}px 56px`, position: "relative", overflow: "hidden", borderBottom: "1px solid rgba(237,230,214,0.08)" }}>
+      <section id="shop" style={{ padding: `${sectionPadV}px ${sectionPadH}px`, position: "relative", overflow: "hidden", borderBottom: "1px solid rgba(237,230,214,0.08)" }}>
         <div style={{ position: "absolute", inset: 0, background: `radial-gradient(circle at 80% 50%, ${accent}15, transparent 60%)` }} />
-        <div style={{ position: "relative", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
+        <div style={{
+          position: "relative",
+          display: "grid",
+          gridTemplateColumns: rv(vp, "1fr", "1fr", "1fr 1fr"),
+          gap: rv(vp, 36, 56, 80),
+          alignItems: "center",
+        }}>
           <div>
-            <div style={{ display: "inline-block", padding: "6px 14px", border: `1px solid ${accent}`, color: accent, fontSize: 10, letterSpacing: "0.32em", textTransform: "uppercase", marginBottom: 28 }}>
+            <div style={{ display: "inline-block", padding: "8px 14px", border: `1px solid ${accent}`, color: accent, fontSize: 10, letterSpacing: "0.32em", textTransform: "uppercase", marginBottom: 28 }}>
               Avautuu kesällä 2026
             </div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontSize: 96, lineHeight: 0.95, margin: 0, color: "#F4EEDF", letterSpacing: "-0.02em" }}>
+            <h2 style={{
+              fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+              fontSize: "clamp(40px, 10vw, 96px)",
+              lineHeight: 0.95, margin: 0, color: "#F4EEDF", letterSpacing: "-0.02em",
+            }}>
               Verkkokauppa<br/><em style={{ color: accent }}>ammattilaisille.</em>
             </h2>
-            <p style={{ marginTop: 28, fontSize: 17, lineHeight: 1.65, color: "#c9c2b6", maxWidth: 480 }}>
+            <p style={{ marginTop: 28, fontSize: rv(vp, 16, 16, 17), lineHeight: 1.65, color: "#c9c2b6", maxWidth: 480 }}>
               Sukat, hartsit, kalvot, jyrsinpäät ja kalibrointiletkut suoraan
               tehdaspakkauksesta. Suomalaiset varastot, seuraavan päivän
               toimitus Suomeen ja 2–3 päivää muualle Pohjoismaihin.
             </p>
-            <div style={{ marginTop: 40, display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
+            <div style={{ marginTop: 40, display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: rv(vp, 14, 18, 24) }}>
               {[["300+", "nimikettä"], ["1–3 pv", "toimitus"], ["4 maata", "Pohjola"]].map(([n, l], i) => (
                 <div key={i} style={{ borderTop: `1px solid ${accent}40`, paddingTop: 14 }}>
-                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 36, color: accent, lineHeight: 1 }}>{n}</div>
-                  <div style={{ fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", color: "#9a948a", marginTop: 8 }}>{l}</div>
+                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: rv(vp, 24, 30, 36), color: accent, lineHeight: 1 }}>{n}</div>
+                  <div style={{ fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: "#9a948a", marginTop: 8, lineHeight: 1.4 }}>{l}</div>
                 </div>
               ))}
             </div>
-            <form style={{ marginTop: 44, display: "flex", gap: 0, maxWidth: 460, borderBottom: `1px solid ${accent}` }}>
-              <input placeholder="firma@osoite.fi" style={{ flex: 1, background: "transparent", border: 0, outline: 0, color: "#F4EEDF", padding: "16px 0", fontSize: 15, letterSpacing: "0.04em" }} />
-              <button style={{ background: "transparent", border: 0, color: accent, padding: "16px 0", fontSize: 11, letterSpacing: "0.28em", textTransform: "uppercase", cursor: "pointer", fontWeight: 600 }}>Ilmoita avauksesta →</button>
+            <form style={{ marginTop: 40, display: "flex", flexWrap: "wrap", gap: 0, maxWidth: 460, borderBottom: `1px solid ${accent}` }} onSubmit={(e) => e.preventDefault()}>
+              <input placeholder="firma@osoite.fi" inputMode="email" style={{ flex: "1 1 200px", background: "transparent", border: 0, outline: 0, color: "#F4EEDF", padding: "16px 0", fontSize: 16, letterSpacing: "0.04em", minWidth: 0 }} />
+              <button style={{ background: "transparent", border: 0, color: accent, padding: "16px 0", fontSize: 11, letterSpacing: "0.28em", textTransform: "uppercase", cursor: "pointer", fontWeight: 600, minHeight: 44 }}>Ilmoita avauksesta →</button>
             </form>
-            <div style={{ marginTop: 12, fontSize: 11, color: "#7d796f", letterSpacing: "0.04em" }}>
+            <div style={{ marginTop: 12, fontSize: 11, color: "#7d796f", letterSpacing: "0.04em", lineHeight: 1.5 }}>
               Ei spämmiä — vain lanseerausilmoitus &amp; ennakkohinnasto kumppaneille.
             </div>
           </div>
           <div style={{ position: "relative" }}>
             <div style={{ aspectRatio: "1/1", background: "#0F0F11", border: `1px solid ${accent}30`, position: "relative", overflow: "hidden" }}>
               <div style={{ position: "absolute", inset: 0, background: `repeating-linear-gradient(45deg, transparent 0 30px, ${accent}08 30px 31px)` }} />
-              <div style={{ position: "absolute", inset: 40, border: `1px dashed ${accent}40`, display: "flex", flexDirection: "column", justifyContent: "space-between", padding: 28 }}>
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <div style={{ position: "absolute", inset: rv(vp, 24, 32, 40), border: `1px dashed ${accent}40`, display: "flex", flexDirection: "column", justifyContent: "space-between", padding: rv(vp, 18, 24, 28) }}>
+                <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
                   <LSMark size={28} accent={accent} />
-                  <div style={{ fontSize: 10, letterSpacing: "0.32em", textTransform: "uppercase", color: accent }}>SKU 0001 · Polinvent</div>
+                  <div style={{ fontSize: 10, letterSpacing: "0.28em", textTransform: "uppercase", color: accent }}>SKU 0001 · Polinvent</div>
                 </div>
                 <div>
-                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 64, color: "#F4EEDF", lineHeight: 1 }}>
+                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px, 7vw, 64px)", color: "#F4EEDF", lineHeight: 1 }}>
                     Polinvent<br/>Sukka <em style={{ color: accent }}>DN150</em>
                   </div>
                   <div style={{ fontSize: 12, color: "#9a948a", marginTop: 16, letterSpacing: "0.06em" }}>Ø 100–200 mm · 30 m rulla · CE-merkitty</div>
                 </div>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
-                  <div style={{ fontSize: 10, letterSpacing: "0.32em", textTransform: "uppercase", color: "#9a948a" }}>Varastosta heti</div>
-                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 32, color: accent }}>—,—€</div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 8 }}>
+                  <div style={{ fontSize: 10, letterSpacing: "0.28em", textTransform: "uppercase", color: "#9a948a" }}>Varastosta heti</div>
+                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: rv(vp, 24, 28, 32), color: accent }}>—,—€</div>
                 </div>
               </div>
             </div>
@@ -349,24 +448,44 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
       </section>
 
       {/* ───── CONTACT — CALL FIRST ───── */}
-      <section style={{ padding: `${pad}px 56px` }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
+      <section style={{ padding: `${sectionPadV}px ${sectionPadH}px` }}>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: rv(vp, "1fr", "1fr", "1fr 1fr"),
+          gap: rv(vp, 36, 56, 80),
+          alignItems: "center",
+        }}>
           <div>
             <div style={{ fontSize: 11, letterSpacing: "0.32em", textTransform: "uppercase", color: accent, marginBottom: 24 }}>
               <span style={{ display: "inline-block", width: 24, height: 1, background: accent, marginRight: 16, verticalAlign: "middle" }} />
               Yhteys
             </div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontSize: 132, lineHeight: 0.9, margin: 0, color: "#F4EEDF", letterSpacing: "-0.02em" }}>
+            <h2 style={{
+              fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+              fontSize: "clamp(56px, 14vw, 132px)",
+              lineHeight: 0.9, margin: 0, color: "#F4EEDF", letterSpacing: "-0.02em",
+            }}>
               Soita.<br/><em style={{ color: accent }}>Vastataan.</em>
             </h2>
-            <a href="tel:+358503264439" style={{ display: "inline-block", marginTop: 36, fontFamily: "'Cormorant Garamond', serif", fontSize: 56, color: accent, textDecoration: "none", letterSpacing: "0.02em" }}>
+            <a href="tel:+358503264439" style={{
+              display: "inline-block", marginTop: 32,
+              fontFamily: "'Cormorant Garamond', serif",
+              fontSize: "clamp(36px, 8vw, 56px)",
+              color: accent, textDecoration: "none", letterSpacing: "0.02em",
+              minHeight: 56,
+            }}>
               050 326 4439
             </a>
-            <div style={{ marginTop: 16, fontSize: 13, letterSpacing: "0.18em", textTransform: "uppercase", color: "#9a948a" }}>
+            <div style={{ marginTop: 14, fontSize: 12, letterSpacing: "0.18em", textTransform: "uppercase", color: "#9a948a", lineHeight: 1.5 }}>
               Ma–Pe 7–18 · Soita, viestillä tai WhatsAppilla
             </div>
           </div>
-          <div style={{ borderLeft: `1px solid ${accent}30`, paddingLeft: 56 }}>
+          <div style={{
+            borderLeft: vp.isDesktop ? `1px solid ${accent}30` : "none",
+            paddingLeft: vp.isDesktop ? 56 : 0,
+            paddingTop: vp.isDesktop ? 0 : 8,
+            borderTop: vp.isDesktop ? "none" : `1px solid ${accent}30`,
+          }}>
             {[
               ["Sähköposti", "jonne@linesystems.fi", "mailto:jonne@linesystems.fi"],
               ["WhatsApp", "050 326 4439", "https://wa.me/358503264439"],
@@ -374,12 +493,12 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
               ["Toimitusalue", "Suomi · Ruotsi · Norja · Tanska", null],
               ["Y-tunnus", "3616448-8", null],
             ].map(([h, v, l], i) => (
-              <div key={i} style={{ padding: "24px 0", borderBottom: "1px solid rgba(237,230,214,0.12)" }}>
-                <div style={{ fontSize: 11, letterSpacing: "0.32em", textTransform: "uppercase", color: "#9a948a", marginBottom: 10 }}>{h}</div>
+              <div key={i} style={{ padding: "20px 0", borderBottom: "1px solid rgba(237,230,214,0.12)" }}>
+                <div style={{ fontSize: 11, letterSpacing: "0.28em", textTransform: "uppercase", color: "#9a948a", marginBottom: 10 }}>{h}</div>
                 {l ? (
-                  <a href={l} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 26, color: "#F4EEDF", textDecoration: "none" }}>{v}</a>
+                  <a href={l} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: rv(vp, 20, 24, 26), color: "#F4EEDF", textDecoration: "none", wordBreak: "break-word" }}>{v}</a>
                 ) : (
-                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 26, color: "#F4EEDF" }}>{v}</div>
+                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: rv(vp, 20, 24, 26), color: "#F4EEDF", wordBreak: "break-word" }}>{v}</div>
                 )}
               </div>
             ))}
@@ -388,10 +507,16 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
       </section>
 
       {/* ───── FOOTER ───── */}
-      <footer style={{ padding: "56px", background: "#08080A", display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: `1px solid ${accent}30` }}>
-        <Wordmark accent={accent} size={28} />
+      <footer style={{
+        padding: `${rv(vp, 32, 44, 56)}px ${sectionPadH}px`,
+        background: "#08080A",
+        display: "flex", justifyContent: "space-between", alignItems: "center",
+        flexWrap: "wrap", gap: 16,
+        borderTop: `1px solid ${accent}30`,
+      }}>
+        <Wordmark accent={accent} size={26} />
         <LanguagePill accent={accent} active="FI" />
-        <div style={{ fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", color: "#5e5a52" }}>
+        <div style={{ fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: "#5e5a52", flex: vp.isMobile ? "1 1 100%" : "0 1 auto", textAlign: vp.isMobile ? "left" : "right", marginTop: vp.isMobile ? 4 : 0 }}>
           © 2026 Line Systems Oy · Y 3616448-8 · Tietosuoja
         </div>
       </footer>

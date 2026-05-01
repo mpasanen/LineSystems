@@ -9,8 +9,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; background: #050506; }
-  body { font-family: 'Inter', system-ui, sans-serif; color: #EDE6D6; }
+  html, body { margin: 0; padding: 0; background: #050506; overflow-x: hidden; }
+  body { font-family: 'Inter', system-ui, sans-serif; color: #EDE6D6; -webkit-text-size-adjust: 100%; }
+  img, video, svg { max-width: 100%; height: auto; }
+  /* iOS auto-zooms text inputs whose font-size is below 16px on focus —
+     bake the floor in so individual inputs don't have to remember. */
+  input, select, textarea { font-size: 16px; }
 
   @keyframes ls-kb {
     from { transform: scale(1.04) translate(0, 0); }

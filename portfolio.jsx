@@ -1,4 +1,4 @@
-/* global React, Wordmark, LSMark, LanguagePill, HomepageA, HomepageB, HomepageC */
+/* global React, Wordmark, LSMark, LanguagePill, HomepageA, HomepageB, HomepageC, useViewport, rv */
 
 // Portfolio landing — three thumbnails, click to open the full version.
 // Uses hash routing (#a, #b, #c) handled by the host page.
@@ -34,6 +34,10 @@ const VARIATIONS = [
 ];
 
 function PortfolioPage({ accent = "#C9A572", density = "spacious", onSelect }) {
+  const vp = useViewport();
+  const hPad = rv(vp, 20, 36, 56);
+  const heroPadTop = rv(vp, 60, 80, 100);
+
   return (
     <div style={{ minHeight: "100vh", background: "#0B0B0C", color: "#EDE6D6", fontFamily: "'Inter', system-ui, sans-serif", overflowX: "hidden" }}>
       {/* ───── ambient background ───── */}
@@ -45,40 +49,56 @@ function PortfolioPage({ accent = "#C9A572", density = "spacious", onSelect }) {
       {/* ───── nav ───── */}
       <header style={{
         position: "relative", zIndex: 2,
-        display: "flex", justifyContent: "space-between", alignItems: "center",
-        padding: "32px 56px",
+        display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16,
+        padding: `${rv(vp, 20, 28, 32)}px ${hPad}px`,
       }}>
-        <Wordmark accent={accent} size={32} />
-        <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
-          <LanguagePill accent={accent} active="FI" />
+        <Wordmark accent={accent} size={rv(vp, 26, 30, 32)} />
+        <div style={{ display: "flex", gap: rv(vp, 12, 18, 24), alignItems: "center" }}>
+          {!vp.isMobile && <LanguagePill accent={accent} active="FI" />}
           <a href="tel:+358503264439" style={{
-            padding: "10px 20px", border: `1px solid ${accent}`, color: accent,
-            fontSize: 11, letterSpacing: "0.24em", textTransform: "uppercase", textDecoration: "none",
+            padding: "12px 20px",
+            border: `1px solid ${accent}`, color: accent,
+            fontSize: 12, letterSpacing: "0.22em", textTransform: "uppercase", textDecoration: "none",
+            minHeight: 44, display: "inline-flex", alignItems: "center",
           }}>Soita →</a>
         </div>
       </header>
 
       {/* ───── hero ───── */}
-      <section style={{ position: "relative", zIndex: 1, padding: "100px 56px 60px" }}>
+      <section style={{ position: "relative", zIndex: 1, padding: `${heroPadTop}px ${hPad}px ${rv(vp, 32, 48, 60)}px` }}>
         <div style={{ maxWidth: 1280 }}>
-          <div style={{ fontSize: 11, letterSpacing: "0.32em", textTransform: "uppercase", color: accent, marginBottom: 28, display: "flex", alignItems: "center" }}>
-            <span style={{ display: "inline-block", width: 32, height: 1, background: accent, marginRight: 16 }} />
-            Verkkosivuehdotus &nbsp;·&nbsp; Three directions for review
+          <div style={{
+            fontSize: 11, letterSpacing: "0.32em", textTransform: "uppercase", color: accent,
+            marginBottom: rv(vp, 20, 24, 28),
+            display: "flex", alignItems: "center", flexWrap: "wrap", gap: 12,
+          }}>
+            <span style={{ display: "inline-block", width: 32, height: 1, background: accent }} />
+            <span>Verkkosivuehdotus &nbsp;·&nbsp; Three directions for review</span>
           </div>
           <h1 style={{
             fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
-            fontSize: 124, lineHeight: 0.92, letterSpacing: "-0.02em", margin: 0, color: "#F4EEDF",
+            fontSize: "clamp(56px, 12vw, 124px)",
+            lineHeight: 0.95, letterSpacing: "-0.02em", margin: 0, color: "#F4EEDF",
           }}>
             Kolme suuntaa.<br />
             <span style={{ fontStyle: "italic", color: accent }}>Yksi tarina.</span>
           </h1>
-          <p style={{ marginTop: 36, fontSize: 17, lineHeight: 1.65, color: "#c9c2b6", maxWidth: 640 }}>
+          <p style={{
+            marginTop: rv(vp, 24, 30, 36),
+            fontSize: rv(vp, 16, 16, 17), lineHeight: 1.65,
+            color: "#c9c2b6", maxWidth: 640,
+          }}>
             Klikkaa pikkukuvaa avataksesi koko sivu. Jokainen variaatio kantaa
             saman brändin — vain rytmi, typografia ja sävy vaihtuu. Valitse,
             mikä tuntuu oikealta — tai sekoita parhaat palaset.
           </p>
         </div>
-        <div style={{ marginTop: 56, display: "flex", gap: 32, alignItems: "center", fontSize: 11, letterSpacing: "0.28em", textTransform: "uppercase", color: "#7d796f" }}>
+        <div style={{
+          marginTop: rv(vp, 32, 44, 56),
+          display: "flex", gap: rv(vp, 10, 24, 32),
+          alignItems: "center", flexWrap: "wrap",
+          fontSize: 11, letterSpacing: "0.28em", textTransform: "uppercase", color: "#7d796f",
+        }}>
           <span>{VARIATIONS.length} variaatiota</span>
           <span style={{ width: 24, height: 1, background: `${accent}80` }} />
           <span>FI · EN · SV · DA · NO</span>
@@ -88,8 +108,12 @@ function PortfolioPage({ accent = "#C9A572", density = "spacious", onSelect }) {
       </section>
 
       {/* ───── thumbnails ───── */}
-      <section style={{ position: "relative", zIndex: 1, padding: "40px 56px 120px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 32 }}>
+      <section style={{ position: "relative", zIndex: 1, padding: `${rv(vp, 24, 32, 40)}px ${hPad}px ${rv(vp, 80, 100, 120)}px` }}>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: rv(vp, "1fr", "1fr", "repeat(3, 1fr)"),
+          gap: rv(vp, 40, 36, 32),
+        }}>
           {VARIATIONS.map((v, i) => (
             <PortfolioCard key={v.id} variation={v} accent={accent} density={density} onSelect={onSelect} index={i} />
           ))}
@@ -99,12 +123,14 @@ function PortfolioPage({ accent = "#C9A572", density = "spacious", onSelect }) {
       {/* ───── footer ───── */}
       <footer style={{
         position: "relative", zIndex: 1,
-        padding: "40px 56px", borderTop: `1px solid ${accent}30`,
-        display: "flex", justifyContent: "space-between", alignItems: "center",
-        fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", color: "#5e5a52",
+        padding: `${rv(vp, 28, 34, 40)}px ${hPad}px`, borderTop: `1px solid ${accent}30`,
+        display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16,
+        fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: "#5e5a52",
       }}>
-        <div>© 2026 Line Systems Oy · Y 3616448-8 · Vilkkutie 3 A 15, 40320 Jyväskylä</div>
-        <a href="tel:+358503264439" style={{ color: accent, textDecoration: "none" }}>050 326 4439</a>
+        <div style={{ flex: "1 1 200px", minWidth: 0, lineHeight: 1.7 }}>
+          © 2026 Line Systems Oy · Y 3616448-8 · Vilkkutie 3 A 15, 40320 Jyväskylä
+        </div>
+        <a href="tel:+358503264439" style={{ color: accent, textDecoration: "none", minHeight: 32, display: "inline-flex", alignItems: "center" }}>050 326 4439</a>
       </footer>
     </div>
   );
@@ -156,7 +182,7 @@ function PortfolioCard({ variation, accent, density, onSelect, index }) {
           transform: `scale(${scale})`, transformOrigin: "top left",
           pointerEvents: "none",
         }}>
-          {Comp ? <Comp accent={accent} density={density} heroLayout="image" /> : null}
+          {Comp ? <Comp accent={accent} density={density} heroLayout="image" forceDesktop={true} /> : null}
         </div>
 
         {/* gradient + label overlay */}
@@ -187,26 +213,27 @@ function PortfolioCard({ variation, accent, density, onSelect, index }) {
       </div>
 
       {/* Caption */}
-      <div style={{ marginTop: 28 }}>
-        <div style={{ display: "flex", alignItems: "baseline", gap: 18, marginBottom: 10 }}>
+      <div style={{ marginTop: 24 }}>
+        <div style={{ display: "flex", alignItems: "baseline", gap: 16, marginBottom: 10, flexWrap: "wrap" }}>
           <div style={{
             fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic",
-            fontSize: 56, color: accent, lineHeight: 1,
+            fontSize: "clamp(40px, 10vw, 56px)", color: accent, lineHeight: 1,
           }}>{variation.letter}</div>
           <div style={{
             fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
-            fontSize: 36, color: "#F4EEDF", letterSpacing: "-0.01em",
+            fontSize: "clamp(26px, 5.5vw, 36px)", color: "#F4EEDF", letterSpacing: "-0.01em",
           }}>{variation.title}</div>
         </div>
         <div style={{
           fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase",
-          color: "#9a948a", marginBottom: 14,
+          color: "#9a948a", marginBottom: 14, lineHeight: 1.5,
         }}>{variation.eyebrow}</div>
         <div style={{ fontSize: 14, lineHeight: 1.65, color: "#c9c2b6" }}>{variation.blurb}</div>
         <div style={{
           marginTop: 22, display: "inline-flex", alignItems: "center", gap: 10,
-          fontSize: 11, letterSpacing: "0.28em", textTransform: "uppercase",
+          fontSize: 12, letterSpacing: "0.28em", textTransform: "uppercase",
           color: hover ? accent : "#EDE6D6", transition: "color 0.25s",
+          minHeight: 44,
         }}>
           Katso koko sivu
           <span style={{
@@ -221,32 +248,62 @@ function PortfolioCard({ variation, accent, density, onSelect, index }) {
 }
 
 // Floating "back to portfolio" pill shown when a homepage is open.
+// Compact on mobile (just "← A") so it doesn't collide with the homepage's
+// own top-right Soita CTA — we have ~375px of width to share.
 function PortfolioBackBar({ accent = "#C9A572", letter, title, onBack }) {
+  const vp = useViewport();
+  if (vp.isMobile) {
+    return (
+      <a href="#"
+        onClick={(e) => { e.preventDefault(); onBack && onBack(); }}
+        style={{
+          position: "fixed", top: 12, left: 12, zIndex: 1000,
+          display: "inline-flex", alignItems: "center", gap: 8,
+          padding: "8px 10px",
+          background: "rgba(11,11,12,0.85)", backdropFilter: "blur(14px)",
+          border: `1px solid ${accent}40`, borderRadius: 999,
+          fontFamily: "'Inter', system-ui, sans-serif",
+          color: "#EDE6D6", textDecoration: "none",
+          fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 600,
+          minHeight: 36, minWidth: 64,
+        }}>
+        <span style={{ fontSize: 14, color: accent }}>←</span>
+        <span style={{
+          fontFamily: "'JetBrains Mono', monospace", fontSize: 10,
+          letterSpacing: "0.24em", color: accent,
+          padding: "2px 6px", border: `1px solid ${accent}60`, borderRadius: 3,
+        }}>{letter}</span>
+      </a>
+    );
+  }
   return (
     <div style={{
-      position: "fixed", top: 16, left: "50%", transform: "translateX(-50%)",
+      position: "fixed", top: 12, left: "50%", transform: "translateX(-50%)",
       zIndex: 1000, display: "flex", alignItems: "center", gap: 16,
       padding: "10px 16px 10px 14px",
       background: "rgba(11,11,12,0.78)", backdropFilter: "blur(14px)",
       border: `1px solid ${accent}40`, borderRadius: 999,
       fontFamily: "'Inter', system-ui, sans-serif",
+      maxWidth: "calc(100vw - 24px)",
     }}>
       <a href="#" onClick={(e) => { e.preventDefault(); onBack && onBack(); }} style={{
         display: "inline-flex", alignItems: "center", gap: 8,
         color: "#EDE6D6", textDecoration: "none",
-        fontSize: 11, letterSpacing: "0.28em", textTransform: "uppercase", fontWeight: 600,
+        fontSize: 11, letterSpacing: "0.24em", textTransform: "uppercase", fontWeight: 600,
+        minHeight: 32,
       }}>
         <span style={{ fontSize: 16, color: accent }}>←</span>
         Portfolio
       </a>
       <span style={{ width: 1, height: 16, background: "rgba(237,230,214,0.18)" }} />
-      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, minWidth: 0 }}>
         <span style={{
           fontFamily: "'JetBrains Mono', monospace", fontSize: 10,
           letterSpacing: "0.24em", color: accent,
           padding: "3px 8px", border: `1px solid ${accent}60`, borderRadius: 4,
+          flexShrink: 0,
         }}>{letter}</span>
-        <span style={{ fontSize: 12, letterSpacing: "0.06em", color: "#c9c2b6" }}>{title}</span>
+        <span style={{ fontSize: 12, letterSpacing: "0.06em", color: "#c9c2b6", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{title}</span>
       </div>
     </div>
   );
