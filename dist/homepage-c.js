@@ -1,4 +1,4 @@
-/* global React, CinemaPlate, Wordmark, LSMark, ReliningAnimation, PartnerMarquee, StatTicker, HeroVideo, LanguagePill, useViewport, rv, LogoPlate */
+/* global React, CinemaPlate, Wordmark, LSMark, ReliningAnimation, PartnerMarquee, StatTicker, HeroVideo, LanguagePill, useViewport, rv */
 
 // Variation C — "Editorial calm" (B2B reseller + training)
 function HomepageC({
@@ -248,38 +248,6 @@ function HomepageC({
       color: inkAccent
     }
   }, "tarvikkeet jotka eiv\xE4t pet\xE4"), ", laitteet jotka kest\xE4v\xE4t arjen, ja koulutuksen joka tekee menetelm\xE4st\xE4 tuottavaa ty\xF6t\xE4.", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("br", null), "Line Systems toimittaa kaikki kolme. Sanikomin oma kemia ja inversiokalusto, Bodusin Metroliner-j\xE4rjestelm\xE4 DN100\u2013400, ja Suomen Sukitustarvikkeen kotimainen tuki \u2014 saman kent\xE4ll\xE4 oppineen ihmisen kautta.")), /*#__PURE__*/React.createElement("section", {
-    "aria-label": "Line Systems -tunnus",
-    style: {
-      padding: `${rv(vp, 48, 72, 96)}px ${sectionPadH}px`,
-      textAlign: "center",
-      maxWidth: 1100,
-      margin: "0 auto"
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: sans,
-      fontSize: 11,
-      color: inkAccent,
-      letterSpacing: "0.32em",
-      textTransform: "uppercase",
-      marginBottom: 24
-    }
-  }, "Tunnus \xB7 Identity Plate"), /*#__PURE__*/React.createElement(LogoPlate, {
-    accent: accent,
-    framed: true,
-    glow: true
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: 28,
-      fontFamily: serif,
-      fontStyle: "italic",
-      fontSize: "clamp(18px, 3vw, 22px)",
-      color: "#3a3833",
-      maxWidth: 600,
-      margin: "28px auto 0",
-      lineHeight: 1.5
-    }
-  }, "Geometrinen, ajaton, pronssin s\xE4vyinen. Sama tunnus laitteissa, autoissa ja ty\xF6vaatteissa \u2014 yhten\xE4inen kent\xE4ll\xE4.")), /*#__PURE__*/React.createElement("section", {
     style: {
       padding: `${sectionPadV}px ${sectionPadH}px`,
       background: "#EAE4D5",

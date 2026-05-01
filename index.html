@@ -70,10 +70,13 @@
      shift stays low. -->
 <div id="root">
   <div style="min-height:100vh;background:#1a191e;color:#EDE6D6;font-family:'Inter',system-ui,sans-serif">
-    <div style="display:flex;align-items:center;gap:14px;padding:32px 20px">
-      <svg viewBox="0 0 100 110" width="32" height="35" aria-hidden="true" style="display:block;flex-shrink:0">
-        <polygon points="42,4 56,74 30,92 24,58" fill="#0B0B0C" stroke="#1a1a1c" stroke-width="0.5"/>
-        <polygon points="50,48 92,92 46,92" fill="#C9A572"/>
+    <div style="display:flex;align-items:center;gap:10px;padding:32px 20px">
+      <!-- Inline SVG placeholder for the corner logo image. Paints at first
+           byte; the React Wordmark swaps in the real image (assets/logo-3d-hero-640.webp)
+           on first commit. Matches the eventual 32×32 size + gap to keep CLS at 0. -->
+      <svg viewBox="0 0 100 100" width="32" height="32" aria-hidden="true" style="display:block;flex-shrink:0">
+        <polygon points="42,8 56,70 30,86 24,54" fill="#1a191e" stroke="#2a2a2e" stroke-width="0.5"/>
+        <polygon points="50,46 88,86 48,86" fill="#C9A572"/>
       </svg>
       <span style="font-family:'Cormorant Garamond','Times New Roman',serif;font-weight:300;letter-spacing:0.34em;font-size:13px;text-transform:uppercase;line-height:1">Line Systems</span>
     </div>

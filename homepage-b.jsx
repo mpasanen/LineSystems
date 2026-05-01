@@ -1,4 +1,4 @@
-/* global React, CinemaPlate, Wordmark, LSMark, ReliningAnimation, PartnerMarquee, StatTicker, HeroVideo, LanguagePill, useViewport, rv, LogoPlate */
+/* global React, CinemaPlate, Wordmark, LSMark, ReliningAnimation, PartnerMarquee, StatTicker, HeroVideo, LanguagePill, useViewport, rv */
 
 // Variation B — "Industrial precision" (B2B reseller + training)
 function HomepageB({ accent = "#C9A572", density = "spacious", heroLayout = "video", forceDesktop = false }) {
@@ -127,32 +127,6 @@ function HomepageB({ accent = "#C9A572", density = "spacious", heroLayout = "vid
               </div>
             </div>
           )}
-        </div>
-      </section>
-
-      {/* BRAND PLATE — photographed 3D logo as section break */}
-      <section aria-label="Line Systems -tunnus" style={{
-        padding: `${rv(vp, 40, 56, 72)}px ${sectionPadH}px`,
-        background: "#16151a",
-        borderBottom: "1px solid rgba(230,228,223,0.08)",
-      }}>
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: rv(vp, "1fr", "1fr", "5fr 7fr"),
-          gap: rv(vp, 28, 40, 56),
-          alignItems: "center", maxWidth: 1280, margin: "0 auto",
-        }}>
-          <div>
-            <div style={{ fontFamily: mono, fontSize: 11, color: accent, letterSpacing: "0.18em", marginBottom: 16 }}>IDENTITY · 2026</div>
-            <div style={{ fontFamily: sans, fontWeight: 300, fontSize: rv(vp, 28, 32, 36), color: "#F4F1E8", letterSpacing: "-0.02em", lineHeight: 1.15 }}>
-              Geometrinen tunnus<br/>insinöörin tarkkuudella.
-            </div>
-            <div style={{ marginTop: 18, fontFamily: mono, fontSize: 12, color: "#a8a59c", lineHeight: 1.7 }}>
-              Pronssipinta, kohokuvioitu 3D-renderöinti.<br/>
-              Käytössä laitteissa, vaatteissa, kalustossa.
-            </div>
-          </div>
-          <LogoPlate accent={accent} framed={true} glow={false} />
         </div>
       </section>
 

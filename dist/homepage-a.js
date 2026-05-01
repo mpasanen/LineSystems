@@ -1,4 +1,4 @@
-/* global React, CinemaPlate, Wordmark, LSMark, ReliningAnimation, PartnerMarquee, StatTicker, HeroVideo, LanguagePill, useViewport, rv, LogoPlate */
+/* global React, CinemaPlate, Wordmark, LSMark, ReliningAnimation, PartnerMarquee, StatTicker, HeroVideo, LanguagePill, useViewport, rv */
 
 // Variation A — "Cinematic premium" (B2B reseller + training)
 // Line Systems Oy: distributes pipe-relining materials & equipment to
@@ -263,22 +263,6 @@ function HomepageA({
       animation: "ls-scrollline 2.4s ease-in-out infinite"
     }
   }), "Selaa")), /*#__PURE__*/React.createElement("section", {
-    "aria-label": "Line Systems -tunnus",
-    style: {
-      padding: `${rv(vp, 48, 64, 80)}px ${sectionPadH}px ${rv(vp, 32, 48, 64)}px`,
-      background: "radial-gradient(ellipse at 50% 0%, rgba(201,165,114,0.08), transparent 65%)",
-      borderBottom: "1px solid rgba(237,230,214,0.08)"
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      maxWidth: 1100,
-      margin: "0 auto"
-    }
-  }, /*#__PURE__*/React.createElement(LogoPlate, {
-    accent: accent,
-    eyebrow: "EST. 2026 \xB7 JYV\xC4SKYL\xC4",
-    caption: "Line Systems Oy"
-  }))), /*#__PURE__*/React.createElement("section", {
     style: {
       padding: `${sectionPadV}px ${sectionPadH}px`,
       borderBottom: "1px solid rgba(237,230,214,0.08)"

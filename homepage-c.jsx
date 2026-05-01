@@ -1,4 +1,4 @@
-/* global React, CinemaPlate, Wordmark, LSMark, ReliningAnimation, PartnerMarquee, StatTicker, HeroVideo, LanguagePill, useViewport, rv, LogoPlate */
+/* global React, CinemaPlate, Wordmark, LSMark, ReliningAnimation, PartnerMarquee, StatTicker, HeroVideo, LanguagePill, useViewport, rv */
 
 // Variation C — "Editorial calm" (B2B reseller + training)
 function HomepageC({ accent = "#C9A572", density = "spacious", heroLayout = "video", forceDesktop = false }) {
@@ -115,19 +115,6 @@ function HomepageC({ accent = "#C9A572", density = "spacious", heroLayout = "vid
           Suomen Sukitustarvikkeen kotimainen tuki — saman kentällä
           oppineen ihmisen kautta.
         </p>
-      </section>
-
-      {/* BRAND PLATE — editorial brand statement before product capítulos */}
-      <section aria-label="Line Systems -tunnus" style={{
-        padding: `${rv(vp, 48, 72, 96)}px ${sectionPadH}px`,
-        textAlign: "center", maxWidth: 1100, margin: "0 auto",
-      }}>
-        <div style={{ fontFamily: sans, fontSize: 11, color: inkAccent, letterSpacing: "0.32em", textTransform: "uppercase", marginBottom: 24 }}>Tunnus · Identity Plate</div>
-        <LogoPlate accent={accent} framed={true} glow={true} />
-        <div style={{ marginTop: 28, fontFamily: serif, fontStyle: "italic", fontSize: "clamp(18px, 3vw, 22px)", color: "#3a3833", maxWidth: 600, margin: "28px auto 0", lineHeight: 1.5 }}>
-          Geometrinen, ajaton, pronssin sävyinen. Sama tunnus laitteissa,
-          autoissa ja työvaatteissa — yhtenäinen kentällä.
-        </div>
       </section>
 
       {/* PRODUCTS — editorial */}

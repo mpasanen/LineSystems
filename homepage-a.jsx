@@ -1,4 +1,4 @@
-/* global React, CinemaPlate, Wordmark, LSMark, ReliningAnimation, PartnerMarquee, StatTicker, HeroVideo, LanguagePill, useViewport, rv, LogoPlate */
+/* global React, CinemaPlate, Wordmark, LSMark, ReliningAnimation, PartnerMarquee, StatTicker, HeroVideo, LanguagePill, useViewport, rv */
 
 // Variation A — "Cinematic premium" (B2B reseller + training)
 // Line Systems Oy: distributes pipe-relining materials & equipment to
@@ -124,18 +124,6 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
             Selaa
           </div>
         )}
-      </section>
-
-      {/* ───── BRAND PLATE — the photographed 3D logo ─────
-           Sits right under the hero so the brand identity reads first. */}
-      <section aria-label="Line Systems -tunnus" style={{
-        padding: `${rv(vp, 48, 64, 80)}px ${sectionPadH}px ${rv(vp, 32, 48, 64)}px`,
-        background: "radial-gradient(ellipse at 50% 0%, rgba(201,165,114,0.08), transparent 65%)",
-        borderBottom: "1px solid rgba(237,230,214,0.08)",
-      }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <LogoPlate accent={accent} eyebrow="EST. 2026 · JYVÄSKYLÄ" caption="Line Systems Oy" />
-        </div>
       </section>
 
       {/* ───── INTRO STRIP — 3 PILLARS ───── */}

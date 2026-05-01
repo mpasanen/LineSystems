@@ -1,4 +1,4 @@
-/* global React, CinemaPlate, Wordmark, LSMark, ReliningAnimation, PartnerMarquee, StatTicker, HeroVideo, LanguagePill, useViewport, rv, LogoPlate */
+/* global React, CinemaPlate, Wordmark, LSMark, ReliningAnimation, PartnerMarquee, StatTicker, HeroVideo, LanguagePill, useViewport, rv */
 
 // Variation B — "Industrial precision" (B2B reseller + training)
 function HomepageB({
@@ -287,51 +287,6 @@ function HomepageB({
       textAlign: "right"
     }
   }, "FI 1\u20132 pv"))))), /*#__PURE__*/React.createElement("section", {
-    "aria-label": "Line Systems -tunnus",
-    style: {
-      padding: `${rv(vp, 40, 56, 72)}px ${sectionPadH}px`,
-      background: "#16151a",
-      borderBottom: "1px solid rgba(230,228,223,0.08)"
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: "grid",
-      gridTemplateColumns: rv(vp, "1fr", "1fr", "5fr 7fr"),
-      gap: rv(vp, 28, 40, 56),
-      alignItems: "center",
-      maxWidth: 1280,
-      margin: "0 auto"
-    }
-  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: mono,
-      fontSize: 11,
-      color: accent,
-      letterSpacing: "0.18em",
-      marginBottom: 16
-    }
-  }, "IDENTITY \xB7 2026"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: sans,
-      fontWeight: 300,
-      fontSize: rv(vp, 28, 32, 36),
-      color: "#F4F1E8",
-      letterSpacing: "-0.02em",
-      lineHeight: 1.15
-    }
-  }, "Geometrinen tunnus", /*#__PURE__*/React.createElement("br", null), "insin\xF6\xF6rin tarkkuudella."), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: 18,
-      fontFamily: mono,
-      fontSize: 12,
-      color: "#a8a59c",
-      lineHeight: 1.7
-    }
-  }, "Pronssipinta, kohokuvioitu 3D-render\xF6inti.", /*#__PURE__*/React.createElement("br", null), "K\xE4yt\xF6ss\xE4 laitteissa, vaatteissa, kalustossa.")), /*#__PURE__*/React.createElement(LogoPlate, {
-    accent: accent,
-    framed: true,
-    glow: false
-  }))), /*#__PURE__*/React.createElement("section", {
     style: {
       padding: `${sectionPadV}px ${sectionPadH}px`,
       borderBottom: "1px solid rgba(230,228,223,0.08)"

@@ -60,9 +60,25 @@ function LSMark({ size = 40, accent = "#C9A572", dark = "#0B0B0C", mono = false 
 }
 
 function Wordmark({ accent = "#C9A572", color = "#EDE6D6", size = 36, mono = false, tracking = "0.34em" }) {
+  // Small inline lockup: 3D logo image + wordmark, no frame, no glow.
+  // Subtle corner-mark — meant to live in nav bars next to the brand name,
+  // not to be advertised. Image is ~7 KB (640w WebP) so we don't pay much.
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: 14, color }}>
-      <LSMark size={size} accent={accent} mono={mono} dark={mono ? "currentColor" : "#0B0B0C"} />
+    <div style={{ display: "flex", alignItems: "center", gap: 10, color }}>
+      <picture style={{ display: "block", flexShrink: 0 }}>
+        <source srcSet="assets/logo-3d-hero-640.webp" type="image/webp" />
+        <img
+          src="assets/logo-3d-hero-640.jpg"
+          alt=""
+          width={size} height={size}
+          loading="eager"
+          decoding="async"
+          style={{
+            display: "block", width: size, height: size,
+            objectFit: "contain",
+          }}
+        />
+      </picture>
       <div style={{
         fontFamily: "'Cormorant Garamond', 'Cormorant', serif",
         fontWeight: 300,
@@ -368,134 +384,5 @@ function LanguagePill({ accent = "#C9A572", color = "#EDE6D6", inactiveColor, ac
   );
 }
 
-// ─── Logo Plate — the photographed/3D-rendered hero logo ───────────────────
-// Used as a brand-statement section in each homepage. Loads the WebP
-// variant first via <picture> + <source> and falls back to the JPG.
-// `framed` mode adds a hairline bronze frame and corner brackets that play
-// nicely with the editorial typography around it.
-function LogoPlate({
-  src = "assets/logo-3d-hero",
-  alt = "Line Systems — pronssin sävyinen logo, kohokuvioitu 3D-renderöinti",
-  accent = "#C9A572",
-  framed = true,
-  height,
-  glow = true,
-  caption,
-  eyebrow,
-}) {
-  return (
-    <div style={{ position: "relative", width: "100%" }}>
-      {framed && (
-        <div aria-hidden style={{
-          position: "absolute", inset: 0, pointerEvents: "none", zIndex: 2,
-          border: `1px solid ${accent}40`,
-        }}>
-          {[0, 1, 2, 3].map(i => (
-            <span key={i} style={{
-              position: "absolute",
-              [i < 2 ? "top" : "bottom"]: -1,
-              [i % 2 === 0 ? "left" : "right"]: -1,
-              width: 18, height: 18,
-              borderTop: i < 2 ? `2px solid ${accent}` : "none",
-              borderBottom: i >= 2 ? `2px solid ${accent}` : "none",
-              borderLeft: i % 2 === 0 ? `2px solid ${accent}` : "none",
-              borderRight: i % 2 === 1 ? `2px solid ${accent}` : "none",
-            }} />
-          ))}
-        </div>
-      )}
-      {/* Warm bronze backdrop so the contained logo sits on a plate
-          rather than floating against the page bg. */}
-      <div aria-hidden style={{
-        position: "absolute", inset: 0, zIndex: 0,
-        background: "radial-gradient(ellipse at 50% 50%, rgba(201,165,114,0.10), rgba(28,27,32,0.6) 70%), linear-gradient(180deg, #1f1d23 0%, #18171c 100%)",
-      }} />
-      <picture style={{ position: "relative", zIndex: 1, display: "block" }}>
-        {/* Responsive variants — browser picks the smallest source that still
-            covers the rendered width. Saves ~100 KB on mobile vs always shipping
-            the 1536px master. */}
-        <source
-          type="image/webp"
-          srcSet={`${src}-640.webp 640w, ${src}-1024.webp 1024w, ${src}.webp 1536w`}
-          sizes="(max-width: 768px) 92vw, (max-width: 1100px) 720px, 1024px"
-        />
-        <source
-          type="image/jpeg"
-          srcSet={`${src}-640.jpg 640w, ${src}-1024.jpg 1024w, ${src}.jpg 1536w`}
-          sizes="(max-width: 768px) 92vw, (max-width: 1100px) 720px, 1024px"
-        />
-        {/* Explicit width/height so the browser reserves the aspect-ratio
-            box before the bytes arrive — eliminates layout shift. */}
-        <img
-          src={`${src}-1024.jpg`}
-          alt={alt}
-          width={1536}
-          height={1024}
-          loading="lazy"
-          decoding="async"
-          style={{
-            display: "block", width: "100%", height: height || "auto",
-            aspectRatio: "1536 / 1024",
-            objectFit: "contain",
-            padding: "6%",
-            animation: glow ? "ls-glow 6s ease-in-out infinite" : "none",
-          }}
-        />
-      </picture>
-      {(eyebrow || caption) && (
-        <div style={{
-          position: "absolute", left: 0, right: 0, bottom: 0, zIndex: 3,
-          padding: "20px 24px",
-          background: "linear-gradient(180deg, transparent 0%, rgba(22,21,26,0.90) 100%)",
-        }}>
-          {eyebrow && (
-            <div style={{
-              fontFamily: "'JetBrains Mono', monospace", fontSize: 10,
-              letterSpacing: "0.28em", textTransform: "uppercase", color: accent,
-              marginBottom: 6,
-            }}>{eyebrow}</div>
-          )}
-          {caption && (
-            <div style={{
-              fontFamily: "'Cormorant Garamond', serif", fontSize: 22,
-              color: "#F4EEDF", lineHeight: 1.2,
-            }}>{caption}</div>
-          )}
-        </div>
-      )}
-    </div>
-  );
-}
-
-// ─── Logo Lockup — the new 3D logo at small size for headers/footers ────────
-function LogoLockup({ size = 44, color = "#EDE6D6", accent = "#C9A572", showText = true }) {
-  return (
-    <div style={{ display: "inline-flex", alignItems: "center", gap: 12, color }}>
-      <picture>
-        <source srcSet="assets/logo-3d-hero-640.webp" type="image/webp" />
-        <img
-          src="assets/logo-3d-hero-640.jpg"
-          alt="Line Systems"
-          width={size * 1.5} height={size}
-          style={{
-            display: "block", width: size * 1.5, height: size,
-            objectFit: "contain", padding: 4,
-            background: "linear-gradient(180deg, #1f1d23, #18171c)",
-            border: `1px solid ${accent}30`,
-          }}
-        />
-      </picture>
-      {showText && (
-        <span style={{
-          fontFamily: "'Cormorant Garamond', 'Cormorant', serif",
-          fontWeight: 300, letterSpacing: "0.34em",
-          fontSize: size * 0.4, textTransform: "uppercase",
-          whiteSpace: "nowrap", lineHeight: 1,
-        }}>Line Systems</span>
-      )}
-    </div>
-  );
-}
-
 // Expose to other Babel scripts.
-Object.assign(window, { LSMark, Wordmark, ReliningAnimation, CinemaPlate, PartnerMarquee, StatTicker, HeroVideo, LanguagePill, useViewport, rv, LogoPlate, LogoLockup });
+Object.assign(window, { LSMark, Wordmark, ReliningAnimation, CinemaPlate, PartnerMarquee, StatTicker, HeroVideo, LanguagePill, useViewport, rv });
