@@ -317,7 +317,7 @@ function CinemaPlate({
       width: "100%",
       height,
       overflow: "hidden",
-      background: "#000"
+      background: "#16151a"
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -462,7 +462,7 @@ function HeroVideo({
       width: "100%",
       height: "100%",
       overflow: "hidden",
-      background: "#000"
+      background: "#16151a"
     }
   }, useVideo && videoSrc ? /*#__PURE__*/React.createElement("video", {
     src: videoSrc
@@ -476,6 +476,7 @@ function HeroVideo({
     loop: true,
     playsInline: true,
     preload: "metadata",
+    fetchPriority: "high",
     "aria-label": label
     // Decorative B-roll with no dialogue. The empty captions track is
     // there to satisfy the a11y audit ("video provides a track") — when
@@ -644,11 +645,30 @@ function LogoPlate({
       borderLeft: i % 2 === 0 ? `2px solid ${accent}` : "none",
       borderRight: i % 2 === 1 ? `2px solid ${accent}` : "none"
     }
-  }))), /*#__PURE__*/React.createElement("picture", null, /*#__PURE__*/React.createElement("source", {
-    srcSet: `${src}.webp`,
-    type: "image/webp"
+  }))), /*#__PURE__*/React.createElement("div", {
+    "aria-hidden": true,
+    style: {
+      position: "absolute",
+      inset: 0,
+      zIndex: 0,
+      background: "radial-gradient(ellipse at 50% 50%, rgba(201,165,114,0.10), rgba(28,27,32,0.6) 70%), linear-gradient(180deg, #1f1d23 0%, #18171c 100%)"
+    }
+  }), /*#__PURE__*/React.createElement("picture", {
+    style: {
+      position: "relative",
+      zIndex: 1,
+      display: "block"
+    }
+  }, /*#__PURE__*/React.createElement("source", {
+    type: "image/webp",
+    srcSet: `${src}-640.webp 640w, ${src}-1024.webp 1024w, ${src}.webp 1536w`,
+    sizes: "(max-width: 768px) 92vw, (max-width: 1100px) 720px, 1024px"
+  }), /*#__PURE__*/React.createElement("source", {
+    type: "image/jpeg",
+    srcSet: `${src}-640.jpg 640w, ${src}-1024.jpg 1024w, ${src}.jpg 1536w`,
+    sizes: "(max-width: 768px) 92vw, (max-width: 1100px) 720px, 1024px"
   }), /*#__PURE__*/React.createElement("img", {
-    src: `${src}.jpg`,
+    src: `${src}-1024.jpg`,
     alt: alt,
     width: 1536,
     height: 1024,
@@ -659,7 +679,8 @@ function LogoPlate({
       width: "100%",
       height: height || "auto",
       aspectRatio: "1536 / 1024",
-      objectFit: "cover",
+      objectFit: "contain",
+      padding: "6%",
       animation: glow ? "ls-glow 6s ease-in-out infinite" : "none"
     }
   })), (eyebrow || caption) && /*#__PURE__*/React.createElement("div", {
@@ -670,7 +691,7 @@ function LogoPlate({
       bottom: 0,
       zIndex: 3,
       padding: "20px 24px",
-      background: "linear-gradient(180deg, transparent 0%, rgba(11,11,12,0.85) 100%)"
+      background: "linear-gradient(180deg, transparent 0%, rgba(22,21,26,0.90) 100%)"
     }
   }, eyebrow && /*#__PURE__*/React.createElement("div", {
     style: {
@@ -706,10 +727,10 @@ function LogoLockup({
       color
     }
   }, /*#__PURE__*/React.createElement("picture", null, /*#__PURE__*/React.createElement("source", {
-    srcSet: "assets/logo-3d-hero.webp",
+    srcSet: "assets/logo-3d-hero-640.webp",
     type: "image/webp"
   }), /*#__PURE__*/React.createElement("img", {
-    src: "assets/logo-3d-hero.jpg",
+    src: "assets/logo-3d-hero-640.jpg",
     alt: "Line Systems",
     width: size * 1.5,
     height: size,
@@ -717,8 +738,9 @@ function LogoLockup({
       display: "block",
       width: size * 1.5,
       height: size,
-      objectFit: "cover",
-      objectPosition: "50% 35%",
+      objectFit: "contain",
+      padding: 4,
+      background: "linear-gradient(180deg, #1f1d23, #18171c)",
       border: `1px solid ${accent}30`
     }
   })), showText && /*#__PURE__*/React.createElement("span", {

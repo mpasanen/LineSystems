@@ -39,7 +39,7 @@ function PortfolioPage({
   return /*#__PURE__*/React.createElement("div", {
     style: {
       minHeight: "100vh",
-      background: "#0B0B0C",
+      background: "#1a191e",
       color: "#EDE6D6",
       fontFamily: "'Inter', system-ui, sans-serif",
       overflowX: "hidden"
@@ -264,7 +264,7 @@ function PortfolioCard({
       overflow: "hidden",
       width: "100%",
       aspectRatio: `1440 / ${SLICE}`,
-      background: "#0F0F11",
+      background: "#1f1e23",
       border: `1px solid ${hover ? accent : "rgba(237,230,214,0.10)"}`,
       boxShadow: hover ? `0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px ${accent}40` : "0 12px 40px rgba(0,0,0,0.35)",
       transform: hover ? "translateY(-6px)" : "translateY(0)",
@@ -297,7 +297,7 @@ function PortfolioCard({
       flexDirection: "column",
       justifyContent: "space-between",
       padding: 22,
-      background: `linear-gradient(180deg, rgba(11,11,12,0.0) 60%, rgba(11,11,12,0.85) 100%)`,
+      background: `linear-gradient(180deg, rgba(26,25,30,0.0) 60%, rgba(26,25,30,0.85) 100%)`,
       pointerEvents: "none"
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -309,7 +309,7 @@ function PortfolioCard({
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       padding: "6px 12px",
-      background: "rgba(11,11,12,0.7)",
+      background: "rgba(26,25,30,0.78)",
       backdropFilter: "blur(6px)",
       border: `1px solid ${accent}60`,
       color: accent,
@@ -424,7 +424,7 @@ function PortfolioBackBar({
         alignItems: "center",
         gap: 8,
         padding: "8px 10px",
-        background: "rgba(11,11,12,0.85)",
+        background: "rgba(26,25,30,0.85)",
         backdropFilter: "blur(14px)",
         border: `1px solid ${accent}40`,
         borderRadius: 999,
@@ -466,7 +466,7 @@ function PortfolioBackBar({
       alignItems: "center",
       gap: 16,
       padding: "10px 16px 10px 14px",
-      background: "rgba(11,11,12,0.78)",
+      background: "rgba(26,25,30,0.85)",
       backdropFilter: "blur(14px)",
       border: `1px solid ${accent}40`,
       borderRadius: 999,

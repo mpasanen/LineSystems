@@ -18,7 +18,7 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
   const sectionPadH = rv(vp, 20, 36, 56);
 
   return (
-    <div style={{ background: "#0B0B0C", color: "#EDE6D6", fontFamily: "'Inter', system-ui, sans-serif", overflow: "hidden" }}>
+    <div style={{ background: "#1a191e", color: "#EDE6D6", fontFamily: "'Inter', system-ui, sans-serif", overflow: "hidden" }}>
       {/* ───── NAV ───── */}
       <header style={{
         position: "absolute", top: 0, left: 0, right: 0, zIndex: 10,
@@ -59,7 +59,7 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
           <CinemaPlate src="assets/van-bronze-front-glossy.jpg" focal="50% 55%" overlay={0.55} accent={accent} />
         )}
         {heroLayout === "logo" && (
-          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 50% 50%, #1a1612, #050505 70%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 50% 50%, #2a2218, #16151a 70%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <div style={{ transform: "scale(4)" }}>
               <LSMark size={120} accent={accent} dark="#1a1a1c" />
             </div>
@@ -225,7 +225,7 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
             { code: "08", title: "R-Case & työkalut", count: "60+ nimikettä", brands: "Suomen Sukitustarvike" },
           ].map((p, i) => (
             <a key={i} href="#" style={{
-              background: "#0F0F11", border: "1px solid rgba(237,230,214,0.08)", padding: rv(vp, 22, 26, 28),
+              background: "#1f1e23", border: "1px solid rgba(237,230,214,0.08)", padding: rv(vp, 22, 26, 28),
               textDecoration: "none", color: "#EDE6D6", display: "flex", flexDirection: "column", justifyContent: "space-between",
               minHeight: 200, position: "relative",
               transition: "border-color 0.2s",
@@ -299,7 +299,7 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
           </div>
           <div style={{ position: "relative", minHeight: rv(vp, 360, 540, 720), order: vp.isMobile ? -1 : 0 }}>
             <CinemaPlate src="assets/founder-hq-van.jpg" focal="45% 55%" overlay={0.2} accent={accent} kenBurns={false} />
-            <div style={{ position: "absolute", left: rv(vp, 16, 24, 32), bottom: rv(vp, 16, 24, 32), right: rv(vp, 16, 24, 32), padding: rv(vp, 18, 22, 28), background: "rgba(11,11,12,0.85)", backdropFilter: "blur(8px)", borderLeft: `2px solid ${accent}` }}>
+            <div style={{ position: "absolute", left: rv(vp, 16, 24, 32), bottom: rv(vp, 16, 24, 32), right: rv(vp, 16, 24, 32), padding: rv(vp, 18, 22, 28), background: "rgba(26,25,30,0.85)", backdropFilter: "blur(8px)", borderLeft: `2px solid ${accent}` }}>
               <div style={{ fontSize: 11, letterSpacing: "0.28em", textTransform: "uppercase", color: accent, marginBottom: 8 }}>Kouluttaja</div>
               <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: rv(vp, 20, 24, 28), color: "#F4EEDF", lineHeight: 1.25 }}>
                 Yli 12 vuotta kentällä — sama mies opettaa.
@@ -348,7 +348,7 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
               focus: "Kotimainen tukku — sukitustarvikkeet, R-Case-työkalu, sertifiointipalvelut, 24/7 myymälä, samana päivänä työmaalle.",
             },
           ].map((p, i) => (
-            <div key={i} style={{ background: "#0B0B0C", padding: rv(vp, 24, 30, 36), position: "relative" }}>
+            <div key={i} style={{ background: "#1a191e", padding: rv(vp, 24, 30, 36), position: "relative" }}>
               <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color: "#a8a59c", letterSpacing: "0.18em", marginBottom: 18 }}>{p.country}</div>
               <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: rv(vp, 28, 32, 36), color: "#F4EEDF", marginBottom: 14, letterSpacing: "-0.01em" }}>{p.name}</div>
               <div style={{ fontSize: 13, lineHeight: 1.65, color: "#c9c2b6" }}>{p.focus}</div>
@@ -445,7 +445,7 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
             </div>
           </div>
           <div style={{ position: "relative" }}>
-            <div style={{ aspectRatio: "1/1", background: "#0F0F11", border: `1px solid ${accent}30`, position: "relative", overflow: "hidden" }}>
+            <div style={{ aspectRatio: "1/1", background: "#1f1e23", border: `1px solid ${accent}30`, position: "relative", overflow: "hidden" }}>
               <div style={{ position: "absolute", inset: 0, background: `repeating-linear-gradient(45deg, transparent 0 30px, ${accent}08 30px 31px)` }} />
               <div style={{ position: "absolute", inset: rv(vp, 24, 32, 40), border: `1px dashed ${accent}40`, display: "flex", flexDirection: "column", justifyContent: "space-between", padding: rv(vp, 18, 24, 28) }}>
                 <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
@@ -530,7 +530,7 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
       {/* ───── FOOTER ───── */}
       <footer style={{
         padding: `${rv(vp, 32, 44, 56)}px ${sectionPadH}px`,
-        background: "#08080A",
+        background: "#16151a",
         display: "flex", justifyContent: "space-between", alignItems: "center",
         flexWrap: "wrap", gap: 16,
         borderTop: `1px solid ${accent}30`,

@@ -47,7 +47,7 @@ function App() {
     view = <PortfolioPage accent={accent} density={density} onSelect={navigate} />;
   } else if (route === 'canvas') {
     view = (
-      <DesignCanvas title="Line Systems Oy — Verkkosivuehdotus" subtitle="Kolme suuntaa · sukitusala · FI · EN · SV · DA · NO" background="#050506">
+      <DesignCanvas title="Line Systems Oy — Verkkosivuehdotus" subtitle="Kolme suuntaa · sukitusala · FI · EN · SV · DA · NO" background="#16151a">
         <DCSection id="homepages" title="Etusivu — kolme suuntaa">
           <DCArtboard id="a" label="A · Cinematic premium" width={1440} height={5400}>
             <HomepageA accent={accent} density={density} heroLayout={heroLayout} forceDesktop={true} />

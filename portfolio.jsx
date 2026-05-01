@@ -39,7 +39,7 @@ function PortfolioPage({ accent = "#C9A572", density = "spacious", onSelect }) {
   const heroPadTop = rv(vp, 60, 80, 100);
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0B0B0C", color: "#EDE6D6", fontFamily: "'Inter', system-ui, sans-serif", overflowX: "hidden" }}>
+    <div style={{ minHeight: "100vh", background: "#1a191e", color: "#EDE6D6", fontFamily: "'Inter', system-ui, sans-serif", overflowX: "hidden" }}>
       {/* ───── ambient background ───── */}
       <div aria-hidden style={{
         position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0,
@@ -167,7 +167,7 @@ function PortfolioCard({ variation, accent, density, onSelect, index }) {
       <div ref={frameRef} style={{
         position: "relative", overflow: "hidden",
         width: "100%", aspectRatio: `1440 / ${SLICE}`,
-        background: "#0F0F11",
+        background: "#1f1e23",
         border: `1px solid ${hover ? accent : "rgba(237,230,214,0.10)"}`,
         boxShadow: hover ? `0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px ${accent}40` : "0 12px 40px rgba(0,0,0,0.35)",
         transform: hover ? "translateY(-6px)" : "translateY(0)",
@@ -195,12 +195,12 @@ function PortfolioCard({ variation, accent, density, onSelect, index }) {
           position: "absolute", inset: 0, zIndex: 2,
           display: "flex", flexDirection: "column", justifyContent: "space-between",
           padding: 22,
-          background: `linear-gradient(180deg, rgba(11,11,12,0.0) 60%, rgba(11,11,12,0.85) 100%)`,
+          background: `linear-gradient(180deg, rgba(26,25,30,0.0) 60%, rgba(26,25,30,0.85) 100%)`,
           pointerEvents: "none",
         }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
             <div style={{
-              padding: "6px 12px", background: "rgba(11,11,12,0.7)", backdropFilter: "blur(6px)",
+              padding: "6px 12px", background: "rgba(26,25,30,0.78)", backdropFilter: "blur(6px)",
               border: `1px solid ${accent}60`, color: accent,
               fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: "0.24em",
             }}>VARIATION · {variation.letter}</div>
@@ -265,7 +265,7 @@ function PortfolioBackBar({ accent = "#C9A572", letter, title, onBack }) {
           position: "fixed", top: 12, left: 12, zIndex: 1000,
           display: "inline-flex", alignItems: "center", gap: 8,
           padding: "8px 10px",
-          background: "rgba(11,11,12,0.85)", backdropFilter: "blur(14px)",
+          background: "rgba(26,25,30,0.85)", backdropFilter: "blur(14px)",
           border: `1px solid ${accent}40`, borderRadius: 999,
           fontFamily: "'Inter', system-ui, sans-serif",
           color: "#EDE6D6", textDecoration: "none",
@@ -286,7 +286,7 @@ function PortfolioBackBar({ accent = "#C9A572", letter, title, onBack }) {
       position: "fixed", top: 12, left: "50%", transform: "translateX(-50%)",
       zIndex: 1000, display: "flex", alignItems: "center", gap: 16,
       padding: "10px 16px 10px 14px",
-      background: "rgba(11,11,12,0.78)", backdropFilter: "blur(14px)",
+      background: "rgba(26,25,30,0.85)", backdropFilter: "blur(14px)",
       border: `1px solid ${accent}40`, borderRadius: 999,
       fontFamily: "'Inter', system-ui, sans-serif",
       maxWidth: "calc(100vw - 24px)",

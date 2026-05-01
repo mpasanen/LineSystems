@@ -75,5 +75,23 @@ for (const t of targets) {
   console.log(`${t.name.padEnd(34)} ${fmt(inSize).padStart(7)} → ${fmt(jpgOut).padStart(6)} jpg / ${fmt(webpOut).padStart(6)} webp  (${meta.width}×${meta.height})`);
 }
 
+// Responsive variants for the logo plate. PageSpeed flagged the 1536-wide
+// hero being downscaled to ~650 CSS px on mobile — wasted bytes. We emit
+// 640 / 1024 / 1600 widths so the browser picks the right size via srcSet.
+const logoSrc = path.join(SRC, "logo-3d-hero.jpg");
+try {
+  await fs.access(logoSrc);
+  for (const w of [640, 1024]) {
+    const jpg = path.join(DST, `logo-3d-hero-${w}.jpg`);
+    const webp = path.join(DST, `logo-3d-hero-${w}.webp`);
+    const pipe = sharp(logoSrc).resize({ width: w, withoutEnlargement: true });
+    await pipe.clone().jpeg({ quality: 86, mozjpeg: true }).toFile(jpg);
+    await pipe.clone().webp({ quality: 84 }).toFile(webp);
+    const jpgKb = ((await fs.stat(jpg)).size / 1024).toFixed(0);
+    const webpKb = ((await fs.stat(webp)).size / 1024).toFixed(0);
+    console.log(`logo-3d-hero-${w}                     →  ${jpgKb.padStart(3)}kb jpg /  ${webpKb.padStart(3)}kb webp`);
+  }
+} catch { /* logo source missing — earlier pass already warned */ }
+
 const fmt = (b) => `${(b / 1024 / 1024).toFixed(2)} MB`;
 console.log(`\nTotal: ${fmt(totalIn)} → ${fmt(totalOut)} (${((1 - totalOut / totalIn) * 100).toFixed(0)}% smaller)`);

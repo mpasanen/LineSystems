@@ -86,12 +86,12 @@ function HomepageC({ accent = "#C9A572", density = "spacious", heroLayout = "vid
 
       {/* HERO PLATE */}
       <section style={{ padding: `0 ${sectionPadH}px 0`, marginBottom: sectionPadV }}>
-        <div style={{ position: "relative", height: rv(vp, 360, 480, 640), overflow: "hidden", background: "#0B0B0C" }}>
+        <div style={{ position: "relative", height: rv(vp, 360, 480, 640), overflow: "hidden", background: "#1a191e" }}>
           {heroLayout === "video"
             ? <HeroVideo videoSrc="https://ihcirdgmyzuzxyit.public.blob.vercel-storage.com/videos/polinvent_mainpage_teaser.mp4" useVideo={true} accent={accent} overlay={0.3} label="POLINVENT · DEMO" />
             : heroLayout === "image"
             ? <CinemaPlate src="assets/founder-hq-van.jpg" focal="45% 55%" overlay={0.25} accent={accent} />
-            : <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 50% 50%, #1a1612, #050505 70%)", display: "flex", alignItems: "center", justifyContent: "center" }}><div style={{ transform: "scale(4)" }}><LSMark size={120} accent={accent} dark="#1a1a1c" /></div></div>}
+            : <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 50% 50%, #2a2218, #16151a 70%)", display: "flex", alignItems: "center", justifyContent: "center" }}><div style={{ transform: "scale(4)" }}><LSMark size={120} accent={accent} dark="#1a1a1c" /></div></div>}
           <div style={{ position: "absolute", left: rv(vp, 16, 24, 32), bottom: rv(vp, 16, 24, 32), fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: "#F2EEE4", letterSpacing: "0.18em" }}>
             PLATE 001 — INVERSION (POLINVENT)
           </div>

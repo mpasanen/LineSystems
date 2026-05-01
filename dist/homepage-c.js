@@ -177,7 +177,7 @@ function HomepageC({
       position: "relative",
       height: rv(vp, 360, 480, 640),
       overflow: "hidden",
-      background: "#0B0B0C"
+      background: "#1a191e"
     }
   }, heroLayout === "video" ? /*#__PURE__*/React.createElement(HeroVideo, {
     videoSrc: "https://ihcirdgmyzuzxyit.public.blob.vercel-storage.com/videos/polinvent_mainpage_teaser.mp4",
@@ -194,7 +194,7 @@ function HomepageC({
     style: {
       position: "absolute",
       inset: 0,
-      background: "radial-gradient(circle at 50% 50%, #1a1612, #050505 70%)",
+      background: "radial-gradient(circle at 50% 50%, #2a2218, #16151a 70%)",
       display: "flex",
       alignItems: "center",
       justifyContent: "center"

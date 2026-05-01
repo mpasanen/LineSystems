@@ -21,7 +21,7 @@ function HomepageB({
   const mono = "'JetBrains Mono', ui-monospace, monospace";
   return /*#__PURE__*/React.createElement("div", {
     style: {
-      background: "#0E0E10",
+      background: "#1c1b20",
       color: "#E6E4DF",
       fontFamily: sans,
       overflow: "hidden"
@@ -31,7 +31,7 @@ function HomepageB({
       position: "sticky",
       top: 0,
       zIndex: 10,
-      background: "rgba(14,14,16,0.85)",
+      background: "rgba(28,27,32,0.85)",
       backdropFilter: "blur(12px)",
       borderBottom: "1px solid rgba(230,228,223,0.08)",
       display: "grid",
@@ -223,7 +223,7 @@ function HomepageB({
     style: {
       position: "absolute",
       inset: 0,
-      background: "radial-gradient(circle at 50% 50%, #1a1612, #050505 70%)",
+      background: "radial-gradient(circle at 50% 50%, #2a2218, #16151a 70%)",
       display: "flex",
       alignItems: "center",
       justifyContent: "center"
@@ -244,7 +244,7 @@ function HomepageB({
       padding: 20,
       minWidth: 240,
       maxWidth: "calc(100% - 48px)",
-      background: "rgba(14,14,16,0.85)",
+      background: "rgba(28,27,32,0.85)",
       backdropFilter: "blur(8px)",
       border: `1px solid ${accent}40`
     }
@@ -290,7 +290,7 @@ function HomepageB({
     "aria-label": "Line Systems -tunnus",
     style: {
       padding: `${rv(vp, 40, 56, 72)}px ${sectionPadH}px`,
-      background: "#08080A",
+      background: "#16151a",
       borderBottom: "1px solid rgba(230,228,223,0.08)"
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -416,7 +416,7 @@ function HomepageB({
     key: i,
     href: "#",
     style: {
-      background: "#0E0E10",
+      background: "#1c1b20",
       padding: rv(vp, 22, 26, 32),
       position: "relative",
       textDecoration: "none",
@@ -500,7 +500,7 @@ function HomepageB({
     }
   }, "Tuotteet ja koulutus, jotka tekev\xE4t siit\xE4 tuottavaa."))), /*#__PURE__*/React.createElement("div", {
     style: {
-      background: "#08080A",
+      background: "#16151a",
       border: "1px solid rgba(230,228,223,0.08)",
       padding: rv(vp, 18, 24, 32),
       position: "relative",
@@ -677,7 +677,7 @@ function HomepageB({
   }, [["Sanikom", "SI · Slovenia", "Inversiorummut, EX-epoksit, silikaattihartsi 3P W01, höyrykattilat, kyllästyspöydät, päälinja- ja pistesukat."], ["Bodus", "CH · Sveitsi", "Metroliner® DN 100–400 kotitalouskaivoihin, painepesu- ja TV-kuvauslaitteet, tiiviyskoetus, kalustosaneerausvaunut."], ["Suomen Sukitustarvike", "FI · Vantaa", "Suomalainen tukku — sukitustarvikkeet, R-Case-työkalu, sertifiointi, 24/7 myymälä."]].map(([n, c, f], i) => /*#__PURE__*/React.createElement("div", {
     key: i,
     style: {
-      background: "#0E0E10",
+      background: "#1c1b20",
       padding: rv(vp, 24, 28, 32)
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -710,7 +710,7 @@ function HomepageB({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      background: "#08080A",
+      background: "#16151a",
       border: `1px solid ${accent}40`,
       padding: rv(vp, 28, 40, 56),
       display: "grid",
@@ -868,7 +868,7 @@ function HomepageB({
   }, v)))))), /*#__PURE__*/React.createElement("footer", {
     style: {
       padding: `${rv(vp, 28, 32, 40)}px ${sectionPadH}px`,
-      background: "#08080A",
+      background: "#16151a",
       borderTop: `1px solid ${accent}30`,
       display: "flex",
       justifyContent: "space-between",

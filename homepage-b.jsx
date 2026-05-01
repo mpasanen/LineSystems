@@ -11,9 +11,9 @@ function HomepageB({ accent = "#C9A572", density = "spacious", heroLayout = "vid
   const mono = "'JetBrains Mono', ui-monospace, monospace";
 
   return (
-    <div style={{ background: "#0E0E10", color: "#E6E4DF", fontFamily: sans, overflow: "hidden" }}>
+    <div style={{ background: "#1c1b20", color: "#E6E4DF", fontFamily: sans, overflow: "hidden" }}>
       <header style={{
-        position: "sticky", top: 0, zIndex: 10, background: "rgba(14,14,16,0.85)", backdropFilter: "blur(12px)",
+        position: "sticky", top: 0, zIndex: 10, background: "rgba(28,27,32,0.85)", backdropFilter: "blur(12px)",
         borderBottom: "1px solid rgba(230,228,223,0.08)",
         display: "grid",
         gridTemplateColumns: vp.isDesktop ? "auto 1fr auto" : "1fr auto",
@@ -112,11 +112,11 @@ function HomepageB({ accent = "#C9A572", density = "spacious", heroLayout = "vid
             ? <HeroVideo videoSrc="https://ihcirdgmyzuzxyit.public.blob.vercel-storage.com/videos/polinvent_mainpage_teaser.mp4" useVideo={true} accent={accent} overlay={0.25} label="POLINVENT · DEMO" />
             : heroLayout === "image"
             ? <CinemaPlate src="assets/van-bronze-side.jpg" focal="50% 55%" overlay={0.25} accent={accent} />
-            : <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 50% 50%, #1a1612, #050505 70%)", display: "flex", alignItems: "center", justifyContent: "center" }}><div style={{ transform: "scale(4)" }}><LSMark size={120} accent={accent} dark="#1a1a1c" /></div></div>}
+            : <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 50% 50%, #2a2218, #16151a 70%)", display: "flex", alignItems: "center", justifyContent: "center" }}><div style={{ transform: "scale(4)" }}><LSMark size={120} accent={accent} dark="#1a1a1c" /></div></div>}
           {!vp.isMobile && (
             <div style={{
               position: "absolute", right: 24, top: 24, padding: 20, minWidth: 240, maxWidth: "calc(100% - 48px)",
-              background: "rgba(14,14,16,0.85)", backdropFilter: "blur(8px)", border: `1px solid ${accent}40`,
+              background: "rgba(28,27,32,0.85)", backdropFilter: "blur(8px)", border: `1px solid ${accent}40`,
             }}>
               <div style={{ fontFamily: mono, fontSize: 10, color: accent, letterSpacing: "0.18em", marginBottom: 10 }}>STOCK · LIVE</div>
               <div style={{ fontSize: 13, color: "#F4F1E8", marginBottom: 14 }}>Sanikom DN100 · 30 m</div>
@@ -133,7 +133,7 @@ function HomepageB({ accent = "#C9A572", density = "spacious", heroLayout = "vid
       {/* BRAND PLATE — photographed 3D logo as section break */}
       <section aria-label="Line Systems -tunnus" style={{
         padding: `${rv(vp, 40, 56, 72)}px ${sectionPadH}px`,
-        background: "#08080A",
+        background: "#16151a",
         borderBottom: "1px solid rgba(230,228,223,0.08)",
       }}>
         <div style={{
@@ -190,7 +190,7 @@ function HomepageB({ accent = "#C9A572", density = "spacious", heroLayout = "vid
             { code: "C.07", title: "Kalibrointiletkut", n: "40", brands: "Sanikom · Bodus" },
             { code: "C.08", title: "R-Case & PPE", n: "60+", brands: "Suomen Sukitustarvike" },
           ].map((s, i) => (
-            <a key={i} href="#" style={{ background: "#0E0E10", padding: rv(vp, 22, 26, 32), position: "relative", textDecoration: "none", color: "#F4F1E8", minHeight: 140 }}>
+            <a key={i} href="#" style={{ background: "#1c1b20", padding: rv(vp, 22, 26, 32), position: "relative", textDecoration: "none", color: "#F4F1E8", minHeight: 140 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 20, gap: 8 }}>
                 <div style={{ fontFamily: mono, fontSize: 11, color: accent, letterSpacing: "0.18em" }}>{s.code}</div>
                 <div style={{ fontFamily: mono, fontSize: 11, color: "#a8a59c" }}>{s.n} SKUs</div>
@@ -221,7 +221,7 @@ function HomepageB({ accent = "#C9A572", density = "spacious", heroLayout = "vid
             <span style={{ color: "#a8a59c" }}>Tuotteet ja koulutus, jotka tekevät siitä tuottavaa.</span>
           </h2>
         </div>
-        <div style={{ background: "#08080A", border: "1px solid rgba(230,228,223,0.08)", padding: rv(vp, 18, 24, 32), position: "relative", overflow: "hidden" }}>
+        <div style={{ background: "#16151a", border: "1px solid rgba(230,228,223,0.08)", padding: rv(vp, 18, 24, 32), position: "relative", overflow: "hidden" }}>
           <div style={{ position: "absolute", top: 12, right: 16, fontFamily: mono, fontSize: 10, color: accent, letterSpacing: "0.18em" }}>FIG. — INVERSION</div>
           <ReliningAnimation height={rv(vp, 180, 220, 260)} accent={accent} />
         </div>
@@ -312,7 +312,7 @@ function HomepageB({ accent = "#C9A572", density = "spacious", heroLayout = "vid
             ["Bodus", "CH · Sveitsi", "Metroliner® DN 100–400 kotitalouskaivoihin, painepesu- ja TV-kuvauslaitteet, tiiviyskoetus, kalustosaneerausvaunut."],
             ["Suomen Sukitustarvike", "FI · Vantaa", "Suomalainen tukku — sukitustarvikkeet, R-Case-työkalu, sertifiointi, 24/7 myymälä."],
           ].map(([n, c, f], i) => (
-            <div key={i} style={{ background: "#0E0E10", padding: rv(vp, 24, 28, 32) }}>
+            <div key={i} style={{ background: "#1c1b20", padding: rv(vp, 24, 28, 32) }}>
               <div style={{ fontFamily: mono, fontSize: 10, color: "#a8a59c", letterSpacing: "0.18em", marginBottom: 14 }}>{c}</div>
               <div style={{ fontSize: rv(vp, 24, 26, 28), color: "#F4F1E8", marginBottom: 12, letterSpacing: "-0.02em", fontWeight: 400 }}>{n}</div>
               <div style={{ fontSize: 13, lineHeight: 1.65, color: "#c9c2b6" }}>{f}</div>
@@ -324,7 +324,7 @@ function HomepageB({ accent = "#C9A572", density = "spacious", heroLayout = "vid
       {/* WEBSHOP TEASER */}
       <section id="shop" style={{ padding: `${sectionPadV}px ${sectionPadH}px`, borderBottom: "1px solid rgba(230,228,223,0.08)" }}>
         <div style={{
-          background: "#08080A", border: `1px solid ${accent}40`,
+          background: "#16151a", border: `1px solid ${accent}40`,
           padding: rv(vp, 28, 40, 56),
           display: "grid",
           gridTemplateColumns: rv(vp, "1fr", "1fr", "1fr 1fr"),
@@ -406,7 +406,7 @@ function HomepageB({ accent = "#C9A572", density = "spacious", heroLayout = "vid
 
       <footer style={{
         padding: `${rv(vp, 28, 32, 40)}px ${sectionPadH}px`,
-        background: "#08080A", borderTop: `1px solid ${accent}30`,
+        background: "#16151a", borderTop: `1px solid ${accent}30`,
         display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16,
         fontFamily: mono, fontSize: 11,
       }}>

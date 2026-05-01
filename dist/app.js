@@ -68,7 +68,7 @@ function App() {
     view = /*#__PURE__*/React.createElement(DesignCanvas, {
       title: "Line Systems Oy \u2014 Verkkosivuehdotus",
       subtitle: "Kolme suuntaa \xB7 sukitusala \xB7 FI \xB7 EN \xB7 SV \xB7 DA \xB7 NO",
-      background: "#050506"
+      background: "#16151a"
     }, /*#__PURE__*/React.createElement(DCSection, {
       id: "homepages",
       title: "Etusivu \u2014 kolme suuntaa"

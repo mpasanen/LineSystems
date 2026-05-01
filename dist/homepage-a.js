@@ -28,7 +28,7 @@ function HomepageA({
   const sectionPadH = rv(vp, 20, 36, 56);
   return /*#__PURE__*/React.createElement("div", {
     style: {
-      background: "#0B0B0C",
+      background: "#1a191e",
       color: "#EDE6D6",
       fontFamily: "'Inter', system-ui, sans-serif",
       overflow: "hidden"
@@ -110,7 +110,7 @@ function HomepageA({
     style: {
       position: "absolute",
       inset: 0,
-      background: "radial-gradient(circle at 50% 50%, #1a1612, #050505 70%)",
+      background: "radial-gradient(circle at 50% 50%, #2a2218, #16151a 70%)",
       display: "flex",
       alignItems: "center",
       justifyContent: "center"
@@ -446,7 +446,7 @@ function HomepageA({
     key: i,
     href: "#",
     style: {
-      background: "#0F0F11",
+      background: "#1f1e23",
       border: "1px solid rgba(237,230,214,0.08)",
       padding: rv(vp, 22, 26, 28),
       textDecoration: "none",
@@ -633,7 +633,7 @@ function HomepageA({
       bottom: rv(vp, 16, 24, 32),
       right: rv(vp, 16, 24, 32),
       padding: rv(vp, 18, 22, 28),
-      background: "rgba(11,11,12,0.85)",
+      background: "rgba(26,25,30,0.85)",
       backdropFilter: "blur(8px)",
       borderLeft: `2px solid ${accent}`
     }
@@ -717,7 +717,7 @@ function HomepageA({
   }].map((p, i) => /*#__PURE__*/React.createElement("div", {
     key: i,
     style: {
-      background: "#0B0B0C",
+      background: "#1a191e",
       padding: rv(vp, 24, 30, 36),
       position: "relative"
     }
@@ -990,7 +990,7 @@ function HomepageA({
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       aspectRatio: "1/1",
-      background: "#0F0F11",
+      background: "#1f1e23",
       border: `1px solid ${accent}30`,
       position: "relative",
       overflow: "hidden"
@@ -1171,7 +1171,7 @@ function HomepageA({
   }, v)))))), /*#__PURE__*/React.createElement("footer", {
     style: {
       padding: `${rv(vp, 32, 44, 56)}px ${sectionPadH}px`,
-      background: "#08080A",
+      background: "#16151a",
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",

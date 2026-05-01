@@ -173,7 +173,7 @@ function CinemaPlate({ src, height = "100%", overlay = 0.45, focal = "50% 50%", 
     ? `image-set(url("${webp}") type("image/webp"), url("${src}") type("image/jpeg"))`
     : `url("${src}")`;
   return (
-    <div style={{ position: "relative", width: "100%", height, overflow: "hidden", background: "#000" }}>
+    <div style={{ position: "relative", width: "100%", height, overflow: "hidden", background: "#16151a" }}>
       <div style={{
         position: "absolute", inset: "-6%",
         backgroundImage: bgImage,
@@ -272,7 +272,7 @@ function HeroVideo({ src = "assets/van-bronze-front-glossy.jpg", videoSrc = "htt
   }, []);
 
   return (
-    <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden", background: "#000" }}>
+    <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden", background: "#16151a" }}>
       {useVideo && videoSrc ? (
         <video
           src={videoSrc}
@@ -285,6 +285,7 @@ function HeroVideo({ src = "assets/van-bronze-front-glossy.jpg", videoSrc = "htt
           loop
           playsInline
           preload="metadata"
+          fetchPriority="high"
           aria-label={label}
           // Decorative B-roll with no dialogue. The empty captions track is
           // there to satisfy the a11y audit ("video provides a track") — when
@@ -403,13 +404,30 @@ function LogoPlate({
           ))}
         </div>
       )}
-      <picture>
-        <source srcSet={`${src}.webp`} type="image/webp" />
+      {/* Warm bronze backdrop so the contained logo sits on a plate
+          rather than floating against the page bg. */}
+      <div aria-hidden style={{
+        position: "absolute", inset: 0, zIndex: 0,
+        background: "radial-gradient(ellipse at 50% 50%, rgba(201,165,114,0.10), rgba(28,27,32,0.6) 70%), linear-gradient(180deg, #1f1d23 0%, #18171c 100%)",
+      }} />
+      <picture style={{ position: "relative", zIndex: 1, display: "block" }}>
+        {/* Responsive variants — browser picks the smallest source that still
+            covers the rendered width. Saves ~100 KB on mobile vs always shipping
+            the 1536px master. */}
+        <source
+          type="image/webp"
+          srcSet={`${src}-640.webp 640w, ${src}-1024.webp 1024w, ${src}.webp 1536w`}
+          sizes="(max-width: 768px) 92vw, (max-width: 1100px) 720px, 1024px"
+        />
+        <source
+          type="image/jpeg"
+          srcSet={`${src}-640.jpg 640w, ${src}-1024.jpg 1024w, ${src}.jpg 1536w`}
+          sizes="(max-width: 768px) 92vw, (max-width: 1100px) 720px, 1024px"
+        />
         {/* Explicit width/height so the browser reserves the aspect-ratio
-            box before the bytes arrive — eliminates layout shift. The 1536x1024
-            ratio matches the source asset; CSS still scales to 100% width. */}
+            box before the bytes arrive — eliminates layout shift. */}
         <img
-          src={`${src}.jpg`}
+          src={`${src}-1024.jpg`}
           alt={alt}
           width={1536}
           height={1024}
@@ -418,7 +436,8 @@ function LogoPlate({
           style={{
             display: "block", width: "100%", height: height || "auto",
             aspectRatio: "1536 / 1024",
-            objectFit: "cover",
+            objectFit: "contain",
+            padding: "6%",
             animation: glow ? "ls-glow 6s ease-in-out infinite" : "none",
           }}
         />
@@ -427,7 +446,7 @@ function LogoPlate({
         <div style={{
           position: "absolute", left: 0, right: 0, bottom: 0, zIndex: 3,
           padding: "20px 24px",
-          background: "linear-gradient(180deg, transparent 0%, rgba(11,11,12,0.85) 100%)",
+          background: "linear-gradient(180deg, transparent 0%, rgba(22,21,26,0.90) 100%)",
         }}>
           {eyebrow && (
             <div style={{
@@ -453,14 +472,15 @@ function LogoLockup({ size = 44, color = "#EDE6D6", accent = "#C9A572", showText
   return (
     <div style={{ display: "inline-flex", alignItems: "center", gap: 12, color }}>
       <picture>
-        <source srcSet="assets/logo-3d-hero.webp" type="image/webp" />
+        <source srcSet="assets/logo-3d-hero-640.webp" type="image/webp" />
         <img
-          src="assets/logo-3d-hero.jpg"
+          src="assets/logo-3d-hero-640.jpg"
           alt="Line Systems"
           width={size * 1.5} height={size}
           style={{
             display: "block", width: size * 1.5, height: size,
-            objectFit: "cover", objectPosition: "50% 35%",
+            objectFit: "contain", padding: 4,
+            background: "linear-gradient(180deg, #1f1d23, #18171c)",
             border: `1px solid ${accent}30`,
           }}
         />
