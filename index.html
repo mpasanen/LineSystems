@@ -3,10 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Line Systems — Web Concept</title>
+<title>Line Systems Oy — Sukitusalan tukku ja koulutus</title>
+
+<meta name="description" content="Line Systems Oy on pohjoismainen sukitusalan tukku ja koulutuspartneri. Sanikomin, Bodusin ja Suomen Sukitustarvikkeen tuotteet, suomalainen varasto, koulutus ja tekninen tuki — yhdestä paikasta.">
+<meta name="theme-color" content="#0B0B0C">
+<link rel="canonical" href="https://mpasanen.github.io/LineSystems/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Line Systems Oy — Sukitusalan tukku ja koulutus">
+<meta property="og:description" content="Sanikomin, Bodusin ja Suomen Sukitustarvikkeen tuotteet, suomalainen varasto, koulutus ja tekninen tuki.">
+<meta property="og:image" content="https://mpasanen.github.io/LineSystems/assets/logo-3d-hero.jpg">
+<meta property="og:url" content="https://mpasanen.github.io/LineSystems/">
+<meta property="og:locale" content="fi_FI">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 110' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='42,4 56,74 30,92 24,58' fill='%230B0B0C'/%3E%3Cpolygon points='50,48 92,92 46,92' fill='%23C9A572'/%3E%3C/svg%3E">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
   *, *::before, *::after { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; background: #050506; overflow-x: hidden; }
@@ -36,139 +52,51 @@
     0%, 100% { opacity: 1; }
     50%      { opacity: 0.3; }
   }
+  @keyframes ls-glow {
+    0%, 100% { filter: drop-shadow(0 0 24px rgba(201, 165, 114, 0.18)) drop-shadow(0 0 60px rgba(201, 165, 114, 0.08)); }
+    50%      { filter: drop-shadow(0 0 36px rgba(201, 165, 114, 0.32)) drop-shadow(0 0 90px rgba(201, 165, 114, 0.14)); }
+  }
   ::selection { background: #C9A572; color: #0B0B0C; }
 </style>
 </head>
 <body>
 
-<div id="root"></div>
+<!-- Initial static skeleton — paints at FCP (~200ms) before the React bundle
+     finishes downloading + executing, so the user isn't staring at a black
+     page for 3+ seconds on slow networks. React.createRoot().render() wipes
+     this on its first commit.
+     Layout matches the eventual top header (wordmark left, padding from edges)
+     so when React replaces it with the real header the cumulative layout
+     shift stays low. -->
+<div id="root">
+  <div style="min-height:100vh;background:#0B0B0C;color:#EDE6D6;font-family:'Inter',system-ui,sans-serif">
+    <div style="display:flex;align-items:center;gap:14px;padding:32px 20px">
+      <svg viewBox="0 0 100 110" width="32" height="35" aria-hidden="true" style="display:block;flex-shrink:0">
+        <polygon points="42,4 56,74 30,92 24,58" fill="#0B0B0C" stroke="#1a1a1c" stroke-width="0.5"/>
+        <polygon points="50,48 92,92 46,92" fill="#C9A572"/>
+      </svg>
+      <span style="font-family:'Cormorant Garamond','Times New Roman',serif;font-weight:300;letter-spacing:0.34em;font-size:13px;text-transform:uppercase;line-height:1">Line Systems</span>
+    </div>
+    <noscript style="display:block;padding:36px 20px;font-size:14px;color:#c9c2b6;max-width:42ch">
+      Tämä sivu vaatii JavaScriptin. <a href="tel:+358503264439" style="color:#C9A572">Soita: 050 326 4439</a>
+    </noscript>
+  </div>
+</div>
 
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<!-- React + ReactDOM production builds (~6 KB gzipped each, vs ~80 KB for dev).
+     Pre-compiled JSX files live under dist/ — no in-browser Babel transform,
+     no 639 KiB babel-standalone download, no 7s of CPU-bound transpilation. -->
+<script defer src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" integrity="sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z" crossorigin="anonymous"></script>
+<script defer src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" integrity="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1" crossorigin="anonymous"></script>
 
-<script type="text/babel" src="design-canvas.jsx"></script>
-<script type="text/babel" src="tweaks-panel.jsx"></script>
-<script type="text/babel" src="brand.jsx"></script>
-<script type="text/babel" src="homepage-a.jsx"></script>
-<script type="text/babel" src="homepage-b.jsx"></script>
-<script type="text/babel" src="homepage-c.jsx"></script>
-<script type="text/babel" src="portfolio.jsx"></script>
-
-<script type="text/babel" data-presets="react">
-const TWEAKS_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "accent": "#C9A572",
-  "density": "spacious",
-  "heroLayout": "video",
-  "showAll": true
-}/*EDITMODE-END*/;
-
-const HOMEPAGES = {
-  a: { Comp: HomepageA, letter: 'A', title: 'Cinematic Premium' },
-  b: { Comp: HomepageB, letter: 'B', title: 'Industrial Precision' },
-  c: { Comp: HomepageC, letter: 'C', title: 'Editorial Calm' },
-};
-
-function useHashRoute() {
-  const parse = () => {
-    const h = (window.location.hash || '').replace(/^#/, '').toLowerCase();
-    if (h === 'a' || h === 'b' || h === 'c') return h;
-    if (h === 'canvas') return 'canvas';
-    return 'portfolio';
-  };
-  const [route, setRoute] = React.useState(parse);
-  React.useEffect(() => {
-    const onChange = () => {
-      setRoute(parse());
-      window.scrollTo({ top: 0, behavior: 'auto' });
-    };
-    window.addEventListener('hashchange', onChange);
-    return () => window.removeEventListener('hashchange', onChange);
-  }, []);
-  const navigate = React.useCallback((id) => {
-    window.location.hash = id ? `#${id}` : '';
-  }, []);
-  return [route, navigate];
-}
-
-function App() {
-  const [tweaks, setTweak] = useTweaks(TWEAKS_DEFAULTS);
-  const [route, navigate] = useHashRoute();
-  const { accent, density, heroLayout } = tweaks;
-
-  let view;
-  if (route === 'portfolio') {
-    view = <PortfolioPage accent={accent} density={density} onSelect={navigate} />;
-  } else if (route === 'canvas') {
-    view = (
-      <DesignCanvas title="Line Systems Oy — Verkkosivuehdotus" subtitle="Kolme suuntaa · sukitusala · FI · EN · SV · DA · NO" background="#050506">
-        <DCSection id="homepages" title="Etusivu — kolme suuntaa">
-          <DCArtboard id="a" label="A · Cinematic premium" width={1440} height={5400}>
-            <HomepageA accent={accent} density={density} heroLayout={heroLayout} />
-          </DCArtboard>
-          <DCArtboard id="b" label="B · Industrial precision" width={1440} height={5200}>
-            <HomepageB accent={accent} density={density} heroLayout={heroLayout} />
-          </DCArtboard>
-          <DCArtboard id="c" label="C · Editorial calm" width={1440} height={6000}>
-            <HomepageC accent={accent} density={density} heroLayout={heroLayout} />
-          </DCArtboard>
-        </DCSection>
-      </DesignCanvas>
-    );
-  } else {
-    const { Comp, letter, title } = HOMEPAGES[route];
-    view = (
-      <>
-        <PortfolioBackBar accent={accent} letter={letter} title={title} onBack={() => navigate('')} />
-        <Comp accent={accent} density={density} heroLayout={heroLayout} />
-      </>
-    );
-  }
-
-  return (
-    <>
-      {view}
-
-      <TweaksPanel title="Tweaks">
-        <TweakSection title="Brand">
-          <TweakColor label="Accent (kulta/pronssi)" value={tweaks.accent} onChange={v => setTweak('accent', v)} />
-        </TweakSection>
-        <TweakSection title="Layout">
-          <TweakRadio label="Tiheys" value={tweaks.density} onChange={v => setTweak('density', v)} options={[
-            { value: 'dense', label: 'Tiheä' },
-            { value: 'normal', label: 'Normaali' },
-            { value: 'spacious', label: 'Väljä' },
-          ]} />
-          <TweakRadio label="Hero" value={tweaks.heroLayout} onChange={v => setTweak('heroLayout', v)} options={[
-            { value: 'video', label: 'Video' },
-            { value: 'image', label: 'Kuva' },
-            { value: 'logo', label: 'Logo' },
-          ]} />
-        </TweakSection>
-        <TweakSection title="Quick swatches">
-          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-            {[
-              ['#C9A572', 'Pronssi'],
-              ['#D4B57A', 'Vaalea kulta'],
-              ['#A8854A', 'Tumma pronssi'],
-              ['#E8DCC0', 'Bone'],
-              ['#B8956A', 'Antiikkikupari'],
-            ].map(([c, n]) => (
-              <button key={c} onClick={() => setTweak('accent', c)} style={{
-                padding: '8px 12px', background: c, color: '#0B0B0C', border: 0,
-                fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 600,
-                cursor: 'pointer',
-              }}>{n}</button>
-            ))}
-          </div>
-        </TweakSection>
-      </TweaksPanel>
-    </>
-  );
-}
-
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-</script>
+<script defer src="dist/design-canvas.js"></script>
+<script defer src="dist/tweaks-panel.js"></script>
+<script defer src="dist/brand.js"></script>
+<script defer src="dist/homepage-a.js"></script>
+<script defer src="dist/homepage-b.js"></script>
+<script defer src="dist/homepage-c.js"></script>
+<script defer src="dist/portfolio.js"></script>
+<script defer src="dist/app.js"></script>
 
 </body>
 </html>

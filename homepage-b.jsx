@@ -1,4 +1,4 @@
-/* global React, CinemaPlate, Wordmark, LSMark, ReliningAnimation, PartnerMarquee, StatTicker, HeroVideo, LanguagePill, useViewport, rv */
+/* global React, CinemaPlate, Wordmark, LSMark, ReliningAnimation, PartnerMarquee, StatTicker, HeroVideo, LanguagePill, useViewport, rv, LogoPlate */
 
 // Variation B — "Industrial precision" (B2B reseller + training)
 function HomepageB({ accent = "#C9A572", density = "spacious", heroLayout = "video", forceDesktop = false }) {
@@ -67,8 +67,8 @@ function HomepageB({ accent = "#C9A572", density = "spacious", heroLayout = "vid
               Sukitusalan<br/>
               <span style={{ color: accent, fontWeight: 500 }}>tukku.</span>
             </h1>
-            <p style={{ marginTop: rv(vp, 24, 30, 36), fontSize: rv(vp, 16, 16, 16), lineHeight: 1.6, color: "#a8a59c", maxWidth: 420 }}>
-              Polinventin, Picoten, Brawolinerin ja iPEKin tuotteet —
+            <p style={{ marginTop: rv(vp, 24, 30, 36), fontSize: rv(vp, 16, 16, 16), lineHeight: 1.6, color: "#c9c2b6", maxWidth: 420 }}>
+              Sanikomin, Bodusin ja Suomen Sukitustarvikkeen tuotteet —
               valikoimasta varastoon, koulutuksiin ja työmaalle.
             </p>
           </div>
@@ -88,7 +88,7 @@ function HomepageB({ accent = "#C9A572", density = "spacious", heroLayout = "vid
                 padding: "14px 0", borderTop: "1px solid rgba(230,228,223,0.08)",
                 fontFamily: mono, fontSize: 12,
               }}>
-                <div style={{ color: "#7d796f", letterSpacing: "0.06em" }}>{k}</div>
+                <div style={{ color: "#a8a59c", letterSpacing: "0.06em" }}>{k}</div>
                 <div style={{ color: "#F4F1E8", textAlign: vp.isMobile ? "right" : "left" }}>{v}</div>
               </div>
             ))}
@@ -119,7 +119,7 @@ function HomepageB({ accent = "#C9A572", density = "spacious", heroLayout = "vid
               background: "rgba(14,14,16,0.85)", backdropFilter: "blur(8px)", border: `1px solid ${accent}40`,
             }}>
               <div style={{ fontFamily: mono, fontSize: 10, color: accent, letterSpacing: "0.18em", marginBottom: 10 }}>STOCK · LIVE</div>
-              <div style={{ fontSize: 13, color: "#F4F1E8", marginBottom: 14 }}>Polinvent DN100 · 30 m</div>
+              <div style={{ fontSize: 13, color: "#F4F1E8", marginBottom: 14 }}>Sanikom DN100 · 30 m</div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, fontFamily: mono, fontSize: 11, color: "#a8a59c" }}>
                 <div>SKU</div><div style={{ color: "#F4F1E8", textAlign: "right" }}>P-100-30</div>
                 <div>STOCK</div><div style={{ color: accent, textAlign: "right" }}>14 rullaa</div>
@@ -127,6 +127,32 @@ function HomepageB({ accent = "#C9A572", density = "spacious", heroLayout = "vid
               </div>
             </div>
           )}
+        </div>
+      </section>
+
+      {/* BRAND PLATE — photographed 3D logo as section break */}
+      <section aria-label="Line Systems -tunnus" style={{
+        padding: `${rv(vp, 40, 56, 72)}px ${sectionPadH}px`,
+        background: "#08080A",
+        borderBottom: "1px solid rgba(230,228,223,0.08)",
+      }}>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: rv(vp, "1fr", "1fr", "5fr 7fr"),
+          gap: rv(vp, 28, 40, 56),
+          alignItems: "center", maxWidth: 1280, margin: "0 auto",
+        }}>
+          <div>
+            <div style={{ fontFamily: mono, fontSize: 11, color: accent, letterSpacing: "0.18em", marginBottom: 16 }}>IDENTITY · 2026</div>
+            <div style={{ fontFamily: sans, fontWeight: 300, fontSize: rv(vp, 28, 32, 36), color: "#F4F1E8", letterSpacing: "-0.02em", lineHeight: 1.15 }}>
+              Geometrinen tunnus<br/>insinöörin tarkkuudella.
+            </div>
+            <div style={{ marginTop: 18, fontFamily: mono, fontSize: 12, color: "#a8a59c", lineHeight: 1.7 }}>
+              Pronssipinta, kohokuvioitu 3D-renderöinti.<br/>
+              Käytössä laitteissa, vaatteissa, kalustossa.
+            </div>
+          </div>
+          <LogoPlate accent={accent} framed={true} glow={false} />
         </div>
       </section>
 
@@ -145,7 +171,7 @@ function HomepageB({ accent = "#C9A572", density = "spacious", heroLayout = "vid
             lineHeight: 1.0, letterSpacing: "-0.025em", margin: 0, color: "#F4F1E8",
           }}>
             300+ nimikettä,<br/>
-            <span style={{ color: "#7d796f" }}>kahdeksassa kategoriassa.</span>
+            <span style={{ color: "#a8a59c" }}>kahdeksassa kategoriassa.</span>
           </h2>
         </div>
 
@@ -155,19 +181,19 @@ function HomepageB({ accent = "#C9A572", density = "spacious", heroLayout = "vid
           gap: 1, background: "rgba(230,228,223,0.08)", border: "1px solid rgba(230,228,223,0.08)",
         }}>
           {[
-            { code: "C.01", title: "Sukat", n: "85", brands: "Polinvent · Brawoliner" },
-            { code: "C.02", title: "Hartsit", n: "32", brands: "Polinvent · Resinit" },
-            { code: "C.03", title: "Höyrykovetus", n: "14", brands: "Polinvent" },
-            { code: "C.04", title: "UV-kovetus", n: "8", brands: "Lateral" },
-            { code: "C.05", title: "TV-kuvaus", n: "22", brands: "iPEK · Rovion" },
-            { code: "C.06", title: "Robotit", n: "18", brands: "Picote" },
-            { code: "C.07", title: "Kalibrointiletkut", n: "40", brands: "Brawoliner" },
-            { code: "C.08", title: "Työkalut & PPE", n: "60+", brands: "" },
+            { code: "C.01", title: "Sukat & sukkamateriaalit", n: "85", brands: "Sanikom · Bodus" },
+            { code: "C.02", title: "Hartsit (EX-sarja)", n: "32", brands: "Sanikom" },
+            { code: "C.03", title: "Inversiorummut & höyry", n: "14", brands: "Sanikom" },
+            { code: "C.04", title: "Metroliner DN100–400", n: "12", brands: "Bodus" },
+            { code: "C.05", title: "TV-kuvaus & raportointi", n: "22", brands: "Bodus" },
+            { code: "C.06", title: "Painepesu & putkenavaus", n: "18", brands: "Bodus" },
+            { code: "C.07", title: "Kalibrointiletkut", n: "40", brands: "Sanikom · Bodus" },
+            { code: "C.08", title: "R-Case & PPE", n: "60+", brands: "Suomen Sukitustarvike" },
           ].map((s, i) => (
             <a key={i} href="#" style={{ background: "#0E0E10", padding: rv(vp, 22, 26, 32), position: "relative", textDecoration: "none", color: "#F4F1E8", minHeight: 140 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 20, gap: 8 }}>
                 <div style={{ fontFamily: mono, fontSize: 11, color: accent, letterSpacing: "0.18em" }}>{s.code}</div>
-                <div style={{ fontFamily: mono, fontSize: 11, color: "#7d796f" }}>{s.n} SKUs</div>
+                <div style={{ fontFamily: mono, fontSize: 11, color: "#a8a59c" }}>{s.n} SKUs</div>
               </div>
               <div style={{ fontSize: rv(vp, 22, 24, 28), fontWeight: 400, color: "#F4F1E8", letterSpacing: "-0.02em", marginBottom: 14 }}>{s.title}</div>
               {s.brands && <div style={{ fontSize: 11, color: "#a8a59c" }}>{s.brands}</div>}
@@ -192,7 +218,7 @@ function HomepageB({ accent = "#C9A572", density = "spacious", heroLayout = "vid
             lineHeight: 1.0, letterSpacing: "-0.025em", margin: 0, color: "#F4F1E8",
           }}>
             Cured-In-Place Pipe.<br/>
-            <span style={{ color: "#7d796f" }}>Tuotteet ja koulutus, jotka tekevät siitä tuottavaa.</span>
+            <span style={{ color: "#a8a59c" }}>Tuotteet ja koulutus, jotka tekevät siitä tuottavaa.</span>
           </h2>
         </div>
         <div style={{ background: "#08080A", border: "1px solid rgba(230,228,223,0.08)", padding: rv(vp, 18, 24, 32), position: "relative", overflow: "hidden" }}>
@@ -220,9 +246,9 @@ function HomepageB({ accent = "#C9A572", density = "spacious", heroLayout = "vid
         </div>
         <div style={{ border: "1px solid rgba(230,228,223,0.08)" }}>
           {[
-            ["T.01", "Polinvent perehdytys", "1 pv", "Tampere", "12.06.26", "vapaa"],
-            ["T.02", "Sukituskurssi (sertifiointi)", "3 pv", "Tampere", "18–20.06.26", "3 paikkaa"],
-            ["T.03", "Picote-robotti", "2 pv", "Tampere", "08–09.07.26", "5 paikkaa"],
+            ["T.01", "Sanikom perehdytys", "1 pv", "Jyväskylä", "12.06.26", "vapaa"],
+            ["T.02", "Sukituskurssi (sertifiointi)", "3 pv", "Jyväskylä", "18–20.06.26", "3 paikkaa"],
+            ["T.03", "Bodus Metroliner-asennus", "2 pv", "Jyväskylä", "08–09.07.26", "5 paikkaa"],
             ["T.04", "Työmaakäynti, asiakas", "0,5 pv", "Sopimuksen mukaan", "—", "tarjous"],
           ].map((r, i) => vp.isMobile ? (
             <div key={i} style={{
@@ -278,21 +304,18 @@ function HomepageB({ accent = "#C9A572", density = "spacious", heroLayout = "vid
         </div>
         <div style={{
           display: "grid",
-          gridTemplateColumns: rv(vp, "1fr", "repeat(2, 1fr)", "repeat(3, 1fr)"),
+          gridTemplateColumns: rv(vp, "1fr", "1fr", "repeat(3, 1fr)"),
           gap: 1, background: "rgba(230,228,223,0.08)", border: "1px solid rgba(230,228,223,0.08)",
         }}>
           {[
-            ["Polinvent", "HU", "Sukat, hartsit, kovetus"],
-            ["Picote Solutions", "FI", "Robotit, jyrsintä"],
-            ["Brawoliner", "DE", "Sukkamateriaalit"],
-            ["iPEK", "AT", "TV-kuvaus"],
-            ["Lateral Repairs", "UK", "Pistekorjaus"],
-            ["Rovion", "FI", "Kameralaitteet"],
+            ["Sanikom", "SI · Slovenia", "Inversiorummut, EX-epoksit, silikaattihartsi 3P W01, höyrykattilat, kyllästyspöydät, päälinja- ja pistesukat."],
+            ["Bodus", "CH · Sveitsi", "Metroliner® DN 100–400 kotitalouskaivoihin, painepesu- ja TV-kuvauslaitteet, tiiviyskoetus, kalustosaneerausvaunut."],
+            ["Suomen Sukitustarvike", "FI · Vantaa", "Suomalainen tukku — sukitustarvikkeet, R-Case-työkalu, sertifiointi, 24/7 myymälä."],
           ].map(([n, c, f], i) => (
-            <div key={i} style={{ background: "#0E0E10", padding: rv(vp, 22, 24, 28) }}>
-              <div style={{ fontFamily: mono, fontSize: 10, color: "#7d796f", letterSpacing: "0.18em", marginBottom: 12 }}>{c}</div>
-              <div style={{ fontSize: rv(vp, 20, 22, 22), color: "#F4F1E8", marginBottom: 8, letterSpacing: "-0.02em" }}>{n}</div>
-              <div style={{ fontSize: 12, color: "#a8a59c" }}>{f}</div>
+            <div key={i} style={{ background: "#0E0E10", padding: rv(vp, 24, 28, 32) }}>
+              <div style={{ fontFamily: mono, fontSize: 10, color: "#a8a59c", letterSpacing: "0.18em", marginBottom: 14 }}>{c}</div>
+              <div style={{ fontSize: rv(vp, 24, 26, 28), color: "#F4F1E8", marginBottom: 12, letterSpacing: "-0.02em", fontWeight: 400 }}>{n}</div>
+              <div style={{ fontSize: 13, lineHeight: 1.65, color: "#c9c2b6" }}>{f}</div>
             </div>
           ))}
         </div>
@@ -326,7 +349,7 @@ function HomepageB({ accent = "#C9A572", density = "spacious", heroLayout = "vid
             </p>
           </div>
           <form style={{ display: "flex", flexDirection: "column", gap: 14 }} onSubmit={(e) => e.preventDefault()}>
-            <label style={{ fontFamily: mono, fontSize: 11, color: "#7d796f", letterSpacing: "0.18em" }}>NOTIFY ON LAUNCH →</label>
+            <label style={{ fontFamily: mono, fontSize: 11, color: "#a8a59c", letterSpacing: "0.18em" }}>NOTIFY ON LAUNCH →</label>
             <div style={{ display: "flex", flexWrap: "wrap", border: `1px solid ${accent}` }}>
               <input placeholder="firma@osoite.fi" inputMode="email" style={{ flex: "1 1 200px", background: "transparent", border: 0, outline: 0, color: "#F4F1E8", padding: "16px 18px", fontFamily: mono, fontSize: 16, minWidth: 0 }} />
               <button style={{ background: accent, color: "#0E0E10", border: 0, padding: "16px 28px", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 700, cursor: "pointer", minHeight: 48 }}>Liity →</button>
@@ -373,7 +396,7 @@ function HomepageB({ accent = "#C9A572", density = "spacious", heroLayout = "vid
               ["VAT / Y", "3616448-8"],
             ].map(([k, v], i) => (
               <div key={i} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", padding: "16px 0", borderTop: "1px solid rgba(230,228,223,0.08)", gap: 12 }}>
-                <div style={{ color: "#7d796f", letterSpacing: "0.18em" }}>{k}</div>
+                <div style={{ color: "#a8a59c", letterSpacing: "0.18em" }}>{k}</div>
                 <div style={{ color: "#F4F1E8", textAlign: "right", wordBreak: "break-word" }}>{v}</div>
               </div>
             ))}
@@ -389,7 +412,7 @@ function HomepageB({ accent = "#C9A572", density = "spacious", heroLayout = "vid
       }}>
         <Wordmark accent={accent} size={24} />
         <LanguagePill accent={accent} active="FI" />
-        <div style={{ color: "#7d796f", letterSpacing: "0.06em", flex: vp.isMobile ? "1 1 100%" : "0 1 auto", textAlign: vp.isMobile ? "left" : "right" }}>© 2026 Line Systems Oy · Y 3616448-8</div>
+        <div style={{ color: "#a8a59c", letterSpacing: "0.06em", flex: vp.isMobile ? "1 1 100%" : "0 1 auto", textAlign: vp.isMobile ? "left" : "right" }}>© 2026 Line Systems Oy · Y 3616448-8</div>
       </footer>
     </div>
   );

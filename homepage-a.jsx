@@ -1,4 +1,4 @@
-/* global React, CinemaPlate, Wordmark, LSMark, ReliningAnimation, PartnerMarquee, StatTicker, HeroVideo, LanguagePill, useViewport, rv */
+/* global React, CinemaPlate, Wordmark, LSMark, ReliningAnimation, PartnerMarquee, StatTicker, HeroVideo, LanguagePill, useViewport, rv, LogoPlate */
 
 // Variation A — "Cinematic premium" (B2B reseller + training)
 // Line Systems Oy: distributes pipe-relining materials & equipment to
@@ -86,8 +86,8 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
             </h1>
             <p style={{ marginTop: rv(vp, 24, 30, 36), fontSize: rv(vp, 16, 16, 17), lineHeight: 1.6, maxWidth: 560, color: "#c9c2b6" }}>
               Line Systems toimittaa sukitusalan ammattilaisille materiaalit,
-              laitteet ja koulutuksen — yhdestä paikasta. Polinventin ja muiden
-              maailman johtavien valmistajien tuotteet, suomalainen varasto,
+              laitteet ja koulutuksen — yhdestä paikasta. Sanikomin, Bodusin
+              ja Suomen Sukitustarvikkeen tuotteet, suomalainen varasto,
               pohjoismainen toimitus.
             </p>
             <div style={{ marginTop: rv(vp, 28, 36, 44), display: "flex", gap: rv(vp, 14, 18, 20), alignItems: "center", flexWrap: "wrap" }}>
@@ -124,6 +124,18 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
             Selaa
           </div>
         )}
+      </section>
+
+      {/* ───── BRAND PLATE — the photographed 3D logo ─────
+           Sits right under the hero so the brand identity reads first. */}
+      <section aria-label="Line Systems -tunnus" style={{
+        padding: `${rv(vp, 48, 64, 80)}px ${sectionPadH}px ${rv(vp, 32, 48, 64)}px`,
+        background: "radial-gradient(ellipse at 50% 0%, rgba(201,165,114,0.08), transparent 65%)",
+        borderBottom: "1px solid rgba(237,230,214,0.08)",
+      }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <LogoPlate accent={accent} eyebrow="EST. 2026 · JYVÄSKYLÄ" caption="Line Systems Oy" />
+        </div>
       </section>
 
       {/* ───── INTRO STRIP — 3 PILLARS ───── */}
@@ -203,14 +215,14 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
           gap: rv(vp, 16, 20, 24),
         }}>
           {[
-            { code: "01", title: "Sukat & sukkamateriaalit", count: "85 nimikettä", brands: "Brawoliner · Polinvent" },
-            { code: "02", title: "Hartsit & kovetteet", count: "32 nimikettä", brands: "Polinvent · Resinit" },
-            { code: "03", title: "Höyry- ja UV-kovetus", count: "14 yksikköä", brands: "Polinvent · Lateral" },
-            { code: "04", title: "Kamerat & TV-kuvaus", count: "22 nimikettä", brands: "iPEK · Rovion" },
-            { code: "05", title: "Robotit & jyrsintä", count: "18 nimikettä", brands: "Picote Solutions" },
-            { code: "06", title: "Pesurit & kompressorit", count: "26 nimikettä", brands: "" },
-            { code: "07", title: "Kalibrointiletkut", count: "40 kokoa", brands: "Brawoliner · Polinvent" },
-            { code: "08", title: "Suojavarusteet & työkalut", count: "60+ nimikettä", brands: "" },
+            { code: "01", title: "Sukat & sukkamateriaalit", count: "85 nimikettä", brands: "Sanikom · Bodus" },
+            { code: "02", title: "Hartsit & kovetteet", count: "32 nimikettä", brands: "Sanikom EX-sarja" },
+            { code: "03", title: "Höyrykovetus & inversiorummut", count: "14 yksikköä", brands: "Sanikom" },
+            { code: "04", title: "Metroliner DN100–400", count: "12 mallia", brands: "Bodus" },
+            { code: "05", title: "TV-kuvaus & raportointi", count: "22 nimikettä", brands: "Bodus" },
+            { code: "06", title: "Painepesu & putkenavaus", count: "26 nimikettä", brands: "Bodus" },
+            { code: "07", title: "Kalibrointiletkut", count: "40 kokoa", brands: "Sanikom · Bodus" },
+            { code: "08", title: "R-Case & työkalut", count: "60+ nimikettä", brands: "Suomen Sukitustarvike" },
           ].map((p, i) => (
             <a key={i} href="#" style={{
               background: "#0F0F11", border: "1px solid rgba(237,230,214,0.08)", padding: rv(vp, 22, 26, 28),
@@ -260,9 +272,9 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
             </p>
             <div style={{ marginTop: 40 }}>
               {[
-                ["Perehdytys", "1 pv", "Polinventin tuotteet & työturva"],
+                ["Perehdytys", "1 pv", "Sanikomin tuotteet & työturva"],
                 ["Sukituskurssi", "3 pv", "Inversiomenetelmä, kovetus, jälkitarkastus"],
-                ["Robottityöt", "2 pv", "Picote-jyrsintä ja haaroitusten avaus"],
+                ["Metroliner-asennus", "2 pv", "Bodusin DN100–400 kotitalouskaivot"],
                 ["Työmaakäynti", "0,5 pv", "Asiakkaan kohteessa, ongelmanratkaisu"],
               ].map(([h, d, b], i) => vp.isMobile ? (
                 <div key={i} style={{ padding: "18px 0", borderTop: "1px solid rgba(237,230,214,0.12)" }}>
@@ -320,17 +332,26 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
           marginBottom: 32,
         }}>
           {[
-            { name: "Polinvent", country: "HU", focus: "Sukat, hartsit, kovetus" },
-            { name: "Picote Solutions", country: "FI", focus: "Robotit, jyrsintä" },
-            { name: "Brawoliner", country: "DE", focus: "Sukkamateriaalit" },
-            { name: "iPEK", country: "AT", focus: "TV-kuvaus, kamerat" },
-            { name: "Lateral Repairs", country: "UK", focus: "Pistekorjaus" },
-            { name: "Rovion", country: "FI", focus: "Kameralaitteet" },
+            {
+              name: "Sanikom",
+              country: "SI · Slovenia",
+              focus: "Inversiorummut, höyrykattilat, kyllästyspöydät, EX-sarjan epoksihartsit, silikaattihartsi 3P W01, päälinja- ja pistesukat.",
+            },
+            {
+              name: "Bodus",
+              country: "CH · Sveitsi",
+              focus: "Metroliner® DN 100–400 kotitalouskaivojen sukitukseen, painepesu- ja TV-kuvauslaitteet, tiiviyskoetuslaitteet, kalustosaneerausvaunut.",
+            },
+            {
+              name: "Suomen Sukitustarvike",
+              country: "FI · Vantaa",
+              focus: "Kotimainen tukku — sukitustarvikkeet, R-Case-työkalu, sertifiointipalvelut, 24/7 myymälä, samana päivänä työmaalle.",
+            },
           ].map((p, i) => (
-            <div key={i} style={{ background: "#0B0B0C", padding: rv(vp, 22, 28, 32), position: "relative" }}>
-              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color: "#9a948a", letterSpacing: "0.18em", marginBottom: 16 }}>{p.country}</div>
-              <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: rv(vp, 24, 26, 28), color: "#F4EEDF", marginBottom: 10 }}>{p.name}</div>
-              <div style={{ fontSize: 12, color: "#9a948a" }}>{p.focus}</div>
+            <div key={i} style={{ background: "#0B0B0C", padding: rv(vp, 24, 30, 36), position: "relative" }}>
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color: "#a8a59c", letterSpacing: "0.18em", marginBottom: 18 }}>{p.country}</div>
+              <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: rv(vp, 28, 32, 36), color: "#F4EEDF", marginBottom: 14, letterSpacing: "-0.01em" }}>{p.name}</div>
+              <div style={{ fontSize: 13, lineHeight: 1.65, color: "#c9c2b6" }}>{p.focus}</div>
             </div>
           ))}
         </div>
@@ -367,7 +388,7 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
               </div>
             </div>
             <div style={{ marginTop: rv(vp, 36, 44, 48), display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: rv(vp, 14, 18, 24) }}>
-              {[["12+ v", "alalla"], ["6", "valmistajakumppania"], ["4", "pohjoismaata"]].map(([n, l], i) => (
+              {[["12+ v", "alalla"], ["3", "valmistajakumppania"], ["4", "pohjoismaata"]].map(([n, l], i) => (
                 <div key={i} style={{ borderTop: `1px solid ${accent}`, paddingTop: 14 }}>
                   <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: rv(vp, 28, 36, 44), color: accent, lineHeight: 1 }}>{n}</div>
                   <div style={{ fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: "#9a948a", marginTop: 8, lineHeight: 1.4 }}>{l}</div>
@@ -429,13 +450,13 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
               <div style={{ position: "absolute", inset: rv(vp, 24, 32, 40), border: `1px dashed ${accent}40`, display: "flex", flexDirection: "column", justifyContent: "space-between", padding: rv(vp, 18, 24, 28) }}>
                 <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
                   <LSMark size={28} accent={accent} />
-                  <div style={{ fontSize: 10, letterSpacing: "0.28em", textTransform: "uppercase", color: accent }}>SKU 0001 · Polinvent</div>
+                  <div style={{ fontSize: 10, letterSpacing: "0.28em", textTransform: "uppercase", color: accent }}>SKU 0001 · Sanikom</div>
                 </div>
                 <div>
                   <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px, 7vw, 64px)", color: "#F4EEDF", lineHeight: 1 }}>
-                    Polinvent<br/>Sukka <em style={{ color: accent }}>DN150</em>
+                    Sanikom<br/>Sukka <em style={{ color: accent }}>DN150</em>
                   </div>
-                  <div style={{ fontSize: 12, color: "#9a948a", marginTop: 16, letterSpacing: "0.06em" }}>Ø 100–200 mm · 30 m rulla · CE-merkitty</div>
+                  <div style={{ fontSize: 12, color: "#a8a59c", marginTop: 16, letterSpacing: "0.06em" }}>Ø 100–200 mm · 30 m rulla · CE-merkitty</div>
                 </div>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 8 }}>
                   <div style={{ fontSize: 10, letterSpacing: "0.28em", textTransform: "uppercase", color: "#9a948a" }}>Varastosta heti</div>
@@ -487,16 +508,16 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
             borderTop: vp.isDesktop ? "none" : `1px solid ${accent}30`,
           }}>
             {[
-              ["Sähköposti", "jonne@linesystems.fi", "mailto:jonne@linesystems.fi"],
-              ["WhatsApp", "050 326 4439", "https://wa.me/358503264439"],
-              ["Toimipiste", "Vilkkutie 3 A 15, 40320 Jyväskylä", null],
-              ["Toimitusalue", "Suomi · Ruotsi · Norja · Tanska", null],
-              ["Y-tunnus", "3616448-8", null],
-            ].map(([h, v, l], i) => (
+              ["Sähköposti", "jonne@linesystems.fi", "mailto:jonne@linesystems.fi", "Lähetä sähköpostia osoitteeseen jonne@linesystems.fi"],
+              ["WhatsApp", "050 326 4439", "https://wa.me/358503264439", "Avaa WhatsApp-keskustelu numerolle 050 326 4439"],
+              ["Toimipiste", "Vilkkutie 3 A 15, 40320 Jyväskylä", null, null],
+              ["Toimitusalue", "Suomi · Ruotsi · Norja · Tanska", null, null],
+              ["Y-tunnus", "3616448-8", null, null],
+            ].map(([h, v, l, aria], i) => (
               <div key={i} style={{ padding: "20px 0", borderBottom: "1px solid rgba(237,230,214,0.12)" }}>
-                <div style={{ fontSize: 11, letterSpacing: "0.28em", textTransform: "uppercase", color: "#9a948a", marginBottom: 10 }}>{h}</div>
+                <div style={{ fontSize: 11, letterSpacing: "0.28em", textTransform: "uppercase", color: "#a8a59c", marginBottom: 10 }}>{h}</div>
                 {l ? (
-                  <a href={l} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: rv(vp, 20, 24, 26), color: "#F4EEDF", textDecoration: "none", wordBreak: "break-word" }}>{v}</a>
+                  <a href={l} aria-label={aria} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: rv(vp, 20, 24, 26), color: "#F4EEDF", textDecoration: "none", wordBreak: "break-word" }}>{v}</a>
                 ) : (
                   <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: rv(vp, 20, 24, 26), color: "#F4EEDF", wordBreak: "break-word" }}>{v}</div>
                 )}
@@ -516,7 +537,7 @@ function HomepageA({ accent = "#C9A572", density = "spacious", heroLayout = "vid
       }}>
         <Wordmark accent={accent} size={26} />
         <LanguagePill accent={accent} active="FI" />
-        <div style={{ fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: "#5e5a52", flex: vp.isMobile ? "1 1 100%" : "0 1 auto", textAlign: vp.isMobile ? "left" : "right", marginTop: vp.isMobile ? 4 : 0 }}>
+        <div style={{ fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: "#a8a59c", flex: vp.isMobile ? "1 1 100%" : "0 1 auto", textAlign: vp.isMobile ? "left" : "right", marginTop: vp.isMobile ? 4 : 0 }}>
           © 2026 Line Systems Oy · Y 3616448-8 · Tietosuoja
         </div>
       </footer>

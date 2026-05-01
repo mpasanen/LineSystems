@@ -1,4 +1,4 @@
-/* global React, CinemaPlate, Wordmark, LSMark, ReliningAnimation, PartnerMarquee, StatTicker, HeroVideo, LanguagePill, useViewport, rv */
+/* global React, CinemaPlate, Wordmark, LSMark, ReliningAnimation, PartnerMarquee, StatTicker, HeroVideo, LanguagePill, useViewport, rv, LogoPlate */
 
 // Variation C — "Editorial calm" (B2B reseller + training)
 function HomepageC({ accent = "#C9A572", density = "spacious", heroLayout = "video", forceDesktop = false }) {
@@ -9,6 +9,11 @@ function HomepageC({ accent = "#C9A572", density = "spacious", heroLayout = "vid
   const sectionPadH = rv(vp, 22, 40, 64);
   const serif = "'Cormorant Garamond', 'Cormorant', serif";
   const sans = "'Inter', system-ui, sans-serif";
+  // The light editorial sections (#F2EEE4) need a darker bronze for body and
+  // small-text accents to clear 4.5:1 contrast. The bright accent (#C9A572)
+  // stays for borders, dividers, and the dark founder section where it pairs
+  // with #1A1916 on the other side of the chip.
+  const inkAccent = "#7a5d28";
 
   return (
     <div style={{ background: "#F2EEE4", color: "#1A1916", fontFamily: sans, overflow: "hidden" }}>
@@ -28,7 +33,7 @@ function HomepageC({ accent = "#C9A572", density = "spacious", heroLayout = "vid
           </nav>
         )}
         <div style={{ display: "flex", gap: rv(vp, 8, 12, 16), alignItems: "center", justifyContent: "flex-end" }}>
-          {!vp.isMobile && <LanguagePill accent={accent} color="#1A1916" active="FI" />}
+          {!vp.isMobile && <LanguagePill accent={inkAccent} color="#1A1916" inactiveColor="#5e5a52" active="FI" />}
           <a href="tel:+358503264439" style={{
             padding: "12px 18px", border: `1px solid ${accent}`, color: "#1A1916",
             fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", textDecoration: "none",
@@ -38,7 +43,7 @@ function HomepageC({ accent = "#C9A572", density = "spacious", heroLayout = "vid
       </header>
 
       <section style={{ padding: `${sectionPadV}px ${sectionPadH}px ${Math.round(sectionPadV * 0.6)}px`, textAlign: "center" }}>
-        <div style={{ fontFamily: sans, fontSize: 11, color: accent, letterSpacing: "0.32em", textTransform: "uppercase", marginBottom: rv(vp, 24, 30, 36) }}>
+        <div style={{ fontFamily: sans, fontSize: 11, color: inkAccent, letterSpacing: "0.32em", textTransform: "uppercase", marginBottom: rv(vp, 24, 30, 36) }}>
           Esittely · Volume One
         </div>
         <h1 style={{
@@ -48,7 +53,7 @@ function HomepageC({ accent = "#C9A572", density = "spacious", heroLayout = "vid
           margin: "0 auto", maxWidth: 1300, color: "#1A1916", textWrap: "balance",
         }}>
           Materiaalit ja menetelmä,<br/>
-          joiden ympärillä <em style={{ color: accent }}>työ kasvaa.</em>
+          joiden ympärillä <em style={{ color: inkAccent }}>työ kasvaa.</em>
         </h1>
         <p style={{
           marginTop: rv(vp, 32, 40, 48),
@@ -95,32 +100,46 @@ function HomepageC({ accent = "#C9A572", density = "spacious", heroLayout = "vid
 
       {/* PROSE — what we do */}
       <section style={{ padding: `0 ${sectionPadH}px ${sectionPadV}px`, maxWidth: 980, margin: "0 auto" }}>
-        <div style={{ fontFamily: sans, fontSize: 11, color: accent, letterSpacing: "0.32em", textTransform: "uppercase", marginBottom: rv(vp, 24, 28, 32), textAlign: "center" }}>Mitä teemme</div>
+        <div style={{ fontFamily: sans, fontSize: 11, color: inkAccent, letterSpacing: "0.32em", textTransform: "uppercase", marginBottom: rv(vp, 24, 28, 32), textAlign: "center" }}>Mitä teemme</div>
         <p style={{
           fontFamily: serif, fontWeight: 300,
           fontSize: "clamp(20px, 4.5vw, 36px)",
           lineHeight: 1.45, color: "#1A1916", margin: 0, textWrap: "balance",
         }}>
-          Sukitusalan urakoitsija tarvitsee kolme asiaa: <em style={{ color: accent }}>tarvikkeet
+          Sukitusalan urakoitsija tarvitsee kolme asiaa: <em style={{ color: inkAccent }}>tarvikkeet
           jotka eivät petä</em>, laitteet jotka kestävät arjen, ja koulutuksen joka
           tekee menetelmästä tuottavaa työtä.
           <br/><br/>
-          Line Systems toimittaa kaikki kolme. Polinventin, Picoten, Brawolinerin
-          ja iPEKin tuotteet suomalaisesta varastosta — ja saman kentällä
-          oppineen ihmisen, joka on opiskellut työn parikymmentä vuotta.
+          Line Systems toimittaa kaikki kolme. Sanikomin oma kemia ja
+          inversiokalusto, Bodusin Metroliner-järjestelmä DN100–400, ja
+          Suomen Sukitustarvikkeen kotimainen tuki — saman kentällä
+          oppineen ihmisen kautta.
         </p>
+      </section>
+
+      {/* BRAND PLATE — editorial brand statement before product capítulos */}
+      <section aria-label="Line Systems -tunnus" style={{
+        padding: `${rv(vp, 48, 72, 96)}px ${sectionPadH}px`,
+        textAlign: "center", maxWidth: 1100, margin: "0 auto",
+      }}>
+        <div style={{ fontFamily: sans, fontSize: 11, color: inkAccent, letterSpacing: "0.32em", textTransform: "uppercase", marginBottom: 24 }}>Tunnus · Identity Plate</div>
+        <LogoPlate accent={accent} framed={true} glow={true} />
+        <div style={{ marginTop: 28, fontFamily: serif, fontStyle: "italic", fontSize: "clamp(18px, 3vw, 22px)", color: "#3a3833", maxWidth: 600, margin: "28px auto 0", lineHeight: 1.5 }}>
+          Geometrinen, ajaton, pronssin sävyinen. Sama tunnus laitteissa,
+          autoissa ja työvaatteissa — yhtenäinen kentällä.
+        </div>
       </section>
 
       {/* PRODUCTS — editorial */}
       <section style={{ padding: `${sectionPadV}px ${sectionPadH}px`, background: "#EAE4D5", borderTop: "1px solid rgba(26,25,22,0.12)", borderBottom: "1px solid rgba(26,25,22,0.12)" }}>
         <div style={{ textAlign: "center", marginBottom: rv(vp, 48, 64, 80) }}>
-          <div style={{ fontFamily: sans, fontSize: 11, color: accent, letterSpacing: "0.32em", textTransform: "uppercase", marginBottom: 24 }}>Valikoima</div>
+          <div style={{ fontFamily: sans, fontSize: 11, color: inkAccent, letterSpacing: "0.32em", textTransform: "uppercase", marginBottom: 24 }}>Valikoima</div>
           <h2 style={{
             fontFamily: serif, fontWeight: 300,
             fontSize: "clamp(40px, 10vw, 96px)",
             lineHeight: 1, margin: 0, color: "#1A1916",
           }}>
-            Yli kolmesataa nimikettä — <em style={{ color: accent }}>kuratoidusti.</em>
+            Yli kolmesataa nimikettä — <em style={{ color: inkAccent }}>kuratoidusti.</em>
           </h2>
         </div>
 
@@ -131,16 +150,16 @@ function HomepageC({ accent = "#C9A572", density = "spacious", heroLayout = "vid
           maxWidth: 1200, margin: "0 auto",
         }}>
           {[
-            ["Sukat & sukkamateriaalit", "Polinvent · Brawoliner", "Inversio- ja vetosukat halkaisijoille DN50–DN500. CE-merkityt, jäljitettävät erät."],
-            ["Hartsit & kovetteet", "Polinvent · Resinit", "Epoksit ja styreenivapaat polyesterit, lyhyet ja pitkät potlife't. Kylmissä keloissa varastosta."],
-            ["Höyry- ja UV-kovetus", "Polinvent · Lateral Repairs", "Höyrykattilat, UV-junat, kalibrointiletkut. Yksiköt vuokraan tai myyntiin."],
-            ["TV-kuvaus & raportointi", "iPEK · Rovion", "Putkikamerat, kruunut, ohjelmistot. Tuemme suomalaista raportointiketjua."],
-            ["Robotit & jyrsintä", "Picote Solutions", "Suomalainen jyrsintekniikka — haaroitusten avaus, vanhojen sukkien purku."],
-            ["Suojavarusteet & työkalut", "Mixed", "Hengityssuojaimet, suojavaatteet, mittarit. Päivittäisen työn perusvarusteet."],
+            ["Sukat & sukkamateriaalit", "Sanikom · Bodus", "Inversio- ja vetosukat DN50–DN500. CE-merkityt, jäljitettävät erät — Sanikomin omaa valmistusta ja Bodusin Metroliner-järjestelmä."],
+            ["EX-sarjan epoksihartsit", "Sanikom", "EX1-2, EX2-2, EX4-2, EXR-2 ja EXRR-2 — eri potlife't ja lujuudet. Lisäksi silikaattihartsi 3P W01 Express pistekorjauksiin."],
+            ["Inversiorummut & höyry", "Sanikom", "Komposiittirummun edelläkävijä. Höyrykattilat, kyllästyspöydät (manuaali / sähkö), ketjuvetoiset rullat."],
+            ["Metroliner DN100–400", "Bodus", "DIBt-sertifioitu kotitalouskaivon sukitusjärjestelmä — kalibrointirullat, inversiolaitteet, ajoneuvokalusto."],
+            ["TV-kuvaus & tiiviyskoetus", "Bodus", "Mobiilit CCTV-järjestelmät, raportointiohjelmistot, putkien ja kaivojen tiiviyskoetuslaitteet."],
+            ["R-Case & työkalut", "Suomen Sukitustarvike", "Kotimainen tukku — R-Case-työkalu, hengityssuojaimet, mittarit, päivittäiset varusteet 24/7 myymälästä."],
           ].map(([h, brand, body], i) => (
             <article key={i} style={{ borderTop: `1px solid ${accent}` }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", padding: "20px 0 24px", gap: 12 }}>
-                <div style={{ fontFamily: serif, fontStyle: "italic", fontSize: 18, color: accent }}>Capítulo {i + 1}</div>
+                <div style={{ fontFamily: serif, fontStyle: "italic", fontSize: 18, color: inkAccent }}>Capítulo {i + 1}</div>
                 <div style={{ fontFamily: sans, fontSize: 10, color: "#5e5a52", letterSpacing: "0.18em", textTransform: "uppercase" }}>{brand}</div>
               </div>
               <h3 style={{
@@ -154,7 +173,7 @@ function HomepageC({ accent = "#C9A572", density = "spacious", heroLayout = "vid
               <a href="#" style={{
                 display: "inline-block", marginTop: 18,
                 fontSize: 12, letterSpacing: "0.22em", textTransform: "uppercase",
-                color: accent, textDecoration: "none", borderBottom: `1px solid ${accent}`,
+                color: inkAccent, textDecoration: "none", borderBottom: `1px solid ${accent}`,
                 padding: "10px 0", minHeight: 40,
               }}>
                 Selaa →
@@ -173,14 +192,14 @@ function HomepageC({ accent = "#C9A572", density = "spacious", heroLayout = "vid
           alignItems: "center",
         }}>
           <div>
-            <div style={{ fontFamily: sans, fontSize: 11, color: accent, letterSpacing: "0.32em", textTransform: "uppercase", marginBottom: 28 }}>Koulutus</div>
+            <div style={{ fontFamily: sans, fontSize: 11, color: inkAccent, letterSpacing: "0.32em", textTransform: "uppercase", marginBottom: 28 }}>Koulutus</div>
             <h2 style={{
               fontFamily: serif, fontWeight: 300,
               fontSize: "clamp(40px, 9vw, 84px)",
               lineHeight: 1, margin: 0, color: "#1A1916",
             }}>
               Hyvä tarvike<br/>
-              <em style={{ color: accent }}>tarvitsee hyvän tekijän.</em>
+              <em style={{ color: inkAccent }}>tarvitsee hyvän tekijän.</em>
             </h2>
             <p style={{
               marginTop: 28, fontFamily: serif, fontStyle: "italic",
@@ -193,9 +212,9 @@ function HomepageC({ accent = "#C9A572", density = "spacious", heroLayout = "vid
           </div>
           <div>
             {[
-              ["Perehdytys", "1 pv", "Polinventin tuotteet & turva"],
+              ["Perehdytys", "1 pv", "Sanikomin tuotteet & turva"],
               ["Sukituskurssi", "3 pv", "Inversio, kovetus, jälkitarkastus"],
-              ["Robottityöt", "2 pv", "Picote-jyrsintä, haaroitusten avaus"],
+              ["Metroliner-asennus", "2 pv", "Bodus DN100–400 kotitalouskaivot"],
               ["Työmaakäynti", "0,5 pv", "Asiakkaan kohteessa"],
             ].map(([h, d, b], i) => (
               <div key={i} style={{
@@ -206,7 +225,7 @@ function HomepageC({ accent = "#C9A572", density = "spacious", heroLayout = "vid
                   <div style={{ fontFamily: serif, fontSize: rv(vp, 22, 25, 28), color: "#1A1916" }}>{h}</div>
                   <div style={{ fontSize: 13, color: "#5e5a52", marginTop: 4 }}>{b}</div>
                 </div>
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: accent, letterSpacing: "0.12em" }}>{d}</div>
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: inkAccent, letterSpacing: "0.12em" }}>{d}</div>
               </div>
             ))}
           </div>
@@ -247,13 +266,13 @@ function HomepageC({ accent = "#C9A572", density = "spacious", heroLayout = "vid
 
       {/* WEBSHOP TEASER */}
       <section id="shop" style={{ padding: `${sectionPadV}px ${sectionPadH}px`, textAlign: "center", maxWidth: 980, margin: "0 auto" }}>
-        <div style={{ fontFamily: sans, fontSize: 11, color: accent, letterSpacing: "0.32em", textTransform: "uppercase", marginBottom: 28 }}>Verkkokauppa</div>
+        <div style={{ fontFamily: sans, fontSize: 11, color: inkAccent, letterSpacing: "0.32em", textTransform: "uppercase", marginBottom: 28 }}>Verkkokauppa</div>
         <h2 style={{
           fontFamily: serif, fontWeight: 300,
           fontSize: "clamp(48px, 12vw, 108px)",
           lineHeight: 0.95, margin: 0, color: "#1A1916", textWrap: "balance",
         }}>
-          Avautuu <em style={{ color: accent }}>kesällä 2026.</em>
+          Avautuu <em style={{ color: inkAccent }}>kesällä 2026.</em>
         </h2>
         <p style={{
           marginTop: 28, fontFamily: serif, fontStyle: "italic",
@@ -270,7 +289,7 @@ function HomepageC({ accent = "#C9A572", density = "spacious", heroLayout = "vid
           borderBottom: `1px solid ${accent}`,
         }} onSubmit={(e) => e.preventDefault()}>
           <input placeholder="firma@osoite.fi" inputMode="email" style={{ flex: "1 1 200px", background: "transparent", border: 0, outline: 0, padding: "16px 0", fontSize: 16, color: "#1A1916", minWidth: 0 }} />
-          <button style={{ background: "transparent", border: 0, color: accent, padding: "16px 0 16px 16px", fontSize: 11, letterSpacing: "0.24em", textTransform: "uppercase", fontWeight: 600, cursor: "pointer", minHeight: 48 }}>Liity →</button>
+          <button style={{ background: "transparent", border: 0, color: inkAccent, padding: "16px 0 16px 16px", fontSize: 11, letterSpacing: "0.24em", textTransform: "uppercase", fontWeight: 600, cursor: "pointer", minHeight: 48 }}>Liity →</button>
         </form>
       </section>
 
@@ -283,7 +302,7 @@ function HomepageC({ accent = "#C9A572", density = "spacious", heroLayout = "vid
           maxWidth: 1280, margin: "0 auto", alignItems: "center",
         }}>
           <div>
-            <div style={{ fontFamily: sans, fontSize: 11, color: accent, letterSpacing: "0.32em", textTransform: "uppercase", marginBottom: 28 }}>Yhteys</div>
+            <div style={{ fontFamily: sans, fontSize: 11, color: inkAccent, letterSpacing: "0.32em", textTransform: "uppercase", marginBottom: 28 }}>Yhteys</div>
             <h2 style={{
               fontFamily: serif, fontWeight: 300,
               fontSize: "clamp(64px, 16vw, 132px)",
@@ -295,7 +314,7 @@ function HomepageC({ accent = "#C9A572", density = "spacious", heroLayout = "vid
               display: "inline-block", marginTop: 28,
               fontFamily: serif,
               fontSize: "clamp(36px, 9vw, 56px)",
-              color: accent, textDecoration: "none",
+              color: inkAccent, textDecoration: "none",
               minHeight: 56,
             }}>
               050 326 4439
@@ -331,7 +350,7 @@ function HomepageC({ accent = "#C9A572", density = "spacious", heroLayout = "vid
         display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16,
       }}>
         <Wordmark accent={accent} color="#1A1916" size={24} />
-        <LanguagePill accent={accent} color="#1A1916" active="FI" />
+        <LanguagePill accent={inkAccent} color="#1A1916" inactiveColor="#5e5a52" active="FI" />
         <div style={{ fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: "#5e5a52", flex: vp.isMobile ? "1 1 100%" : "0 1 auto", textAlign: vp.isMobile ? "left" : "right" }}>© 2026 Line Systems Oy</div>
       </footer>
     </div>

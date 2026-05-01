@@ -1,0 +1,11 @@
+{
+  "name": "linesystems-website",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Line Systems Oy — verkkosivu",
+  "scripts": {
+    "build:jsx": "babel --presets=@babel/preset-react brand.jsx homepage-a.jsx homepage-b.jsx homepage-c.jsx portfolio.jsx design-canvas.jsx tweaks-panel.jsx app.jsx --out-dir dist",
+    "build:img": "node tools/optimize-images.mjs",
+    "build": "npm run build:jsx && npm run build:img"
+  }
+}

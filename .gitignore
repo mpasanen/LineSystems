@@ -19,3 +19,9 @@ node_modules/
 
 # Local screenshot artefacts from responsive testing
 shots/
+
+# Build dependencies (committed: dist/ output, package.json, build script)
+node_modules/
+
+# Pristine source images — re-encoded copies live in assets/
+assets-src/

@@ -97,7 +97,7 @@ function PortfolioPage({ accent = "#C9A572", density = "spacious", onSelect }) {
           marginTop: rv(vp, 32, 44, 56),
           display: "flex", gap: rv(vp, 10, 24, 32),
           alignItems: "center", flexWrap: "wrap",
-          fontSize: 11, letterSpacing: "0.28em", textTransform: "uppercase", color: "#7d796f",
+          fontSize: 11, letterSpacing: "0.28em", textTransform: "uppercase", color: "#a8a59c",
         }}>
           <span>{VARIATIONS.length} variaatiota</span>
           <span style={{ width: 24, height: 1, background: `${accent}80` }} />
@@ -125,7 +125,7 @@ function PortfolioPage({ accent = "#C9A572", density = "spacious", onSelect }) {
         position: "relative", zIndex: 1,
         padding: `${rv(vp, 28, 34, 40)}px ${hPad}px`, borderTop: `1px solid ${accent}30`,
         display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16,
-        fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: "#5e5a52",
+        fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: "#a8a59c",
       }}>
         <div style={{ flex: "1 1 200px", minWidth: 0, lineHeight: 1.7 }}>
           © 2026 Line Systems Oy · Y 3616448-8 · Vilkkutie 3 A 15, 40320 Jyväskylä
@@ -175,8 +175,13 @@ function PortfolioCard({ variation, accent, density, onSelect, index }) {
       }}>
         {/* Full homepage rendered at its native 1440 width then scaled down
             to fit the card. ResizeObserver keeps the scale glued to the
-            column width so there's no overflow at any viewport size. */}
-        <div style={{
+            column width so there's no overflow at any viewport size.
+            `inert` removes the subtree from the tab order and disables it
+            for assistive tech — the rendered links inside (homepage nav,
+            Soita CTA, etc.) shouldn't compete with the card itself for
+            focus, and Lighthouse's target-size audit ignores inert
+            descendants. aria-hidden does the same for screen readers. */}
+        <div inert="" aria-hidden="true" style={{
           position: "absolute", top: 0, left: 0,
           width: 1440, height: SLICE,
           transform: `scale(${scale})`, transformOrigin: "top left",
